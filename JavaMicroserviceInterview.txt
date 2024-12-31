@@ -1,0 +1,430 @@
+Array and array list (when array is used and when arraylist is used)
+Linked list ( why we prefer linkedlist over arraylist)
+Constructor
+Threads in Java - dead lock
+
+Spring boot application properties (application properties.test, application unit test properties) --> it is used for profiling. there are multiple environment, for example we deploy in production, but before that we have dev environment and test environment. so we give configuration over there in application properties for each profiles.)
+
+sping framework yaml
+Different configurations in spring boot
+
+Core Java
+Garbage collection (--> If there is one object but now the object is not in use, then garbage collection remove the object from memory. we can not forcefully do garbage collection method)
+
+Finalised method in garbage collection (--> here it is used for clean up activity)
+
+Spring literals - constant pool - immutable
+
+if question --> sysout(1+2+"welcome"+5+6) -- output -> 3wlecome56 {before string it it is treated as integer, after string it is treated as string for numbers also}
+
+Strings in Java - buffer - builder  (which is more efficent?)  ---> buffer is thread safe and syncronized. builder is not thread safe so it is not taking time and execution is more faster.
+
+Exceptions - checked (--> it is checked at compile time for eg: file not found exception. we get the error at compile time) - runtime (-- error got at runtime, for example arithmatic exception. it is also called as unchecked exception)
+
+Handling exceptions  (--> try catch and user define exception(by using throw keyword))
+
+Comparable (--> it is used for single sorting. for example, if we want to sort by empId only) & comparator (-- it is used for multiple sorting. for example, if we want to sort by empId, name, salary)
+In Comparable compareTo() method is used to sort elements. And in comparator compare() method is used to sort elements.
+We use comparator than comparable when we want to pass the comparation logic.
+Comparable is present in the package java.lang. And Comparator is present in the package java.util.
+  
+Singleton class (--> where only one object is created. by making constructor private we make singleton. We do this so that no one can create new object by using new keyword. Also if we have static method.)
+
+Java 8. use of Lambda? (--> The three primary reasons why we need Java Lambda expressions are as follows: Lambda converts the code segment into an argument. It is a method that can be created without instantiating a class. Lambda can be treated as an Object.)
+
+Optional (--> it is used to avoid null pointer exception. if in one scenerio if the object may be null then we can use optional. isPresent, isEmpty are methods inside Optional class)
+
+SQL connection (how it is connected to database in the project?) 
+How JDBC is used to connect with database? (--> first we register the driver, then by creating the connection, passing query for execution and after that we close the connection and connected to the database.)
+
+Pom.xml (--> it is a file where we add the dependency. if we give the dependency in pom.xml it will download it from internet or other environment.)
+
+Tools to used for commit code? if want to change one application code, then how you get it from git? (--> first we create one folder in my local machine. Then by giving git clone command we will clone the code from remote repository to my local repository)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q. Why strings are immutable and final in java?
+Ans:- Security. Multithreading. If one reference variable change its value, then it will be affected by all the other reference variables.
+
+Q. C++ vs Java?
+Ans:- C++ --> Platform dependent. Supports multiple inheritance. Operator overloading. No built-in support for thread.
+ 
+Java --> Platform Independent. No multiple inheritance. No Operator overloading. Built-in support for thread.
+
+
+Q. Story points in Agile.
+Ans:- Story points in Agile is a measurement that developers use instead of hours. Where as story is a feature that need to make by the developer. 
+
+
+Q. JDK vs JVM vs JRE
+Ans:- JDK  --> JRE + Development tools(Java, Javac). develop and run
+      JVM  --> Interpreter part of both JDK and JRE. To run java program line by line.
+      JRE  --> Only run java application.
+
+Q. Why Java is not fully object oriented?
+Ans:- In java we support int, float, double data types, which are not object oriented.
+
+Q. Method overloading vs Method Overriding?
+Ans:- Method overloading means change in function signature. Where as Method overriding means inheretance (means parent class child class).
+
+Q. JPA vs Hibernate?
+Ans:- JPA:- It is like an interface and have no concrete implementation of it to use functions which are in JPA.
+Hibernate:- It is just a JPA provider which have implementation of the functions in JPA and can have some extra functions which might not be there in JPA.
+
+Q. Spring vs Spring Boot?
+Ans:- Spring --> Dependency Injection. We need to set up the servers explicitly. No support for in memory database.
+Spring Boot --> Spring Boot is a module of Spring framework. Autoconfiguration. Embedded Server. In-memory database.
+
+Q. Agile vs Scrum?
+Ans:- Agile --> Agile is a development methodology. In Agile the leadership plays the vital role.
+Scrum --> Scrum is the one of the implementation of Agile. In which incremental builds are delivered to the customer in every two or three weeks of time. Scrum fosters a self organizing, cross functional team.  
+
+Q. How to overload and Override the Main method in Java?
+Ans:- We cannot Override the main method, because we cannot override static method. 
+We can Overload main method.
+
+************************************************************************************************************************************************************
+
+Q. What is dynamic binding?
+Ans:- Dynamic binding is a feature of polymorphism. for example there is a parent class and a child class. If you want to refer object of parent class or child class then that needs to be decided in dynamically runtime, so in that you can call this as dynamic binding.
+
+Q. What are the different ways to create thread in java?
+Ans:- 1) By extending Thread class.
+2) By implementing Runnable interface. (to implement runnable interface we need to override run method)
+
+Q. States of thread?
+Ans:- new state, runnable, wait/sleep, resume, terminated/stop.
+
+Q. What is deadlock in thread?
+Ans: - A deadlock occurs when two or more threads are blocked and unable to proceed because they are waiting for each other to release a lock.
+
+Q. Is it mandatory to have catch block?
+Ans:- Not mandatory but there must be one block after try. It can be catch or it can be finally.
+
+Q. What is the significance of HashMap?
+Ans:- To store data in key value pair we use HashMap.
+
+Q. Concept of bucketing in HashMap?
+Ans:- Buckets: A HashMap is an array of “buckets.” Each bucket can hold one or more key-value pairs. The goal is to distribute the key-value pairs across these buckets evenly to improve retrieval performance.
+
+Q. Normal HashMap vs Concurrent HashMap?
+Ans:- HashMap is the Class which is under Traditional Collection and ConcurrentHashMap is a Class which is under Concurrent Collections, apart from this there are various differences between them which are:
+
+1) HashMap is non-Synchronized in nature i.e. HashMap is not Thread-safe whereas ConcurrentHashMap is Thread-safe in nature.
+
+2) HashMap performance is relatively high because it is non-synchronized in nature and any number of threads can perform simultaneously. But ConcurrentHashMap performance is low sometimes because sometimes Threads are required to wait on ConcurrentHashMap.
+
+3) While one thread is Iterating the HashMap object, if other thread try to add/modify the contents of Object then we will get Run-time exception saying ConcurrentModificationException.Whereas In ConcurrentHashMap we wont get any exception while performing any modification at the time of Iteration.
+
+
+
+Q. How you connect database in spring boot?
+Ans:- first we need to give database connection in pom.xml file. Then after that we declare database connection in applocation.properties file where we can define the database like we can give username, password, drivers that create connection etc.
+
+In java side we use JPA repository to perform database related connection.
+
+Q. To monitor Application what we can use in spring boot application?
+Ans:- We can use Actuator. Also we can use Spring boot Admin server.
+
+Q. Where you deploy Spring boot application?
+Ans:- In local we use Tomcat server to deploy our application which is embedded in Spring boot already.
+
+Q. How many instances we can use to deploy our application?
+Ans:- We can use n number of instances it depends. For example I am deploying in dev environment then we use that instance.
+
+Q. Why we use microservices in spring boot?
+Ans:- Microservices improve performance because teams handle specific services rather than an app as a whole.
+Microservices architecture provides flexibility for plug-and-play upgrades, simplifying the scaling of specific components within an application without impacting the entire system. Containers are the primary means of deploying microservices on cloud platforms such as Amazon AWS and Microsoft Azure.
+
+Q. Why we need indexing in database?
+Ans:- The objective of indexing is to organize and categorize information in a way that makes it easier to retrieve and access. It involves creating a list of keywords or terms associated with specific pieces of information, making it easier to find relevant information quickly.
+
+Q. What is normalization in database?
+Ans:- Normalization is the process of organizing data in a database. It includes creating tables and establishing relationships between those tables according to rules designed both to protect the data and to make the database more flexible by eliminating redundancy and inconsistent dependency.
+
+Q. What is primary key and foreign key in database?
+Ans:- Primary keys serve as unique identifiers for each row in a database table. Foreign keys link data in one table to the data in another table. A foreign key column in a table points to a column with unique values in another table (often the primary key column) to create a way of cross-referencing the two tables.
+
+************************************************************************************************************************************************************
+
+Q. How Spring boot is better than Spring?
+Ans:- 1) Configuration is better. It allows developers to create standalone applications with no or little configuration.
+2) In sping boot we have embedded servers like tomcat, jetty so easy to deploy.
+3) Dependency management. we can use annotation based configuration for that.
+
+Q. What is dependency injection?
+Ans:- DI means you are injecting a dependency. for eg: there is a class employee, and there are some method inside it. So when we need the instance of the particular employee bean then we need dependency injection. It helps in bean life cycle by decoupling bean creation and configuration. Two ways constructor injection and setter based injection to inject dependency.
+
+Q. Most common annotation in Spring boot?
+Ans:- @Spring boot application  --> 
+@Rest controller   -->
+@get, @put, @post
+@autowired   --> 
+
+
+Q. How to handle exception in Spring boot?
+Ans:- Exception handling in Spring Boot helps to deal with errors and exceptions present in APIs, delivering a robust enterprise application. This article covers various ways in which exceptions can be handled and how to return meaningful error responses to the client in a Spring Boot Project.
+
+Here are some key approaches to exception handling in Spring Boot:
+
+Default exception handling by Spring Boot
+Using @ExceptionHandler annotation
+Using @ControllerAdvice for global exception handling
+
+
+Q. In Rest Api how to connect to database?
+Ans:- First include the dependency in pom.xml file, then in application.properties give database related properties. Then In controller layer we can write the endpoints which need to be excuted like get mapping. then from that give a call to service layer, then to DAO or repository layer. At repository layer we can perform simple crud operations.
+
+Q. How to manage transaction in spring boot?
+Ans:- By giving @transaction annotation in service layer.
+Transaction --> Suppose there is a function deposit and by calling that method we retrieve money then it is called transaction.
+
+Q. How two microservices communicate with each other?
+Ans:- Microservices can communicate asynchronously through messaging queues like RabbitMQ, Apache Kafka, or Amazon SQS. With messaging queues, services can publish messages to a queue, and other services can consume these messages. This decouples communication between services and supports event-driven architectures.
+
+Q. What is syncronous and asyncronous communication in microservices?
+Ans:- Syncronous --> Here operations performs sequencially. First it finish one transaction then it starts another transaction.
+Asyncronous --> We can perform multiple transactions paralally.
+
+Q. What is the flow of Service Discovery?
+Ans:- Service discovery in microservices is the process of dynamically locating and identifying available services within a distributed system. In a microservices architecture, where applications are composed of many small, independent services, service discovery plays a crucial role in enabling communication and collaboration between these services.
+
+1) In microservices environment, services are often deployed across multiple instances or containers, making it challenging for clients to locate and communicate with the appropriate service instances.
+2) Service discovery solves this problem by providing mechanisms for service registration, discovery, and resolution.
+
+Q. How to handle fault tolerance using circuit breaker?
+Ans:- Suppose there are three services A,B,C. A is calling to B and B is calling to C. If C is not responding then circuit breaker is used to handle the failure. We can implement retry mechanism like if a service is down then we call it twice thrice and then if that service is still not available then we can send a message that this service is not available.  
+
+Q. SQL and No SQL database.
+Ans:- In SQL database the datas are organised in a structured way. Where as in No SQL the datas are not organised in a structured way. 
+
+Q. How to manage database schema changes?
+ANs:- Design and deploy the desired schema alongside the original schema. Modify the client code to write changes to both schemas simultaneously. Migrate existing data from the original schema to the new schema, modifying it as necessary to conform to the new structure.
+
+Q. Unique constraint in sql?
+Ans:- The UNIQUE constraint ensures that all values in a column are different.
+
+
+Q. Stream in Java8?
+Ans:- Stream API is used to process collections of objects. A stream in Java is a sequence of objects that supports various methods which can be pipelined to produce the desired result. 
+
+Q. Intermediate and Terminal operation in Java 8?
+Ans:- Intermediate --> filter
+Terminal --> for each, collect, count
+The main difference between intermediate and terminal operations is that intermediate operations return a stream as a result and terminal operations return non-stream values like primitive or object or collection or may not return anything.
+As the names suggest, intermediate operations doesn’t give end result. They just transform one stream to another stream. On the other hand, terminal operations give end result.
+
+************************************************************************************************************************************************************
+
+Q. Abstarct class in java?
+Ans:- abstract classes are as follows:
+1) An instance of an abstract class can not be created.
+2) Constructors are allowed.
+3) We can have an abstract class without any abstract method.
+4) We can define static methods in an abstract class
+5) If a class contains at least one abstract method then compulsory should declare a class as abstract 
+6) If the Child class is unable to provide implementation to all abstract methods of the Parent class then we should declare that Child class as abstract so that the next level Child class should provide implementation to the remaining abstract method.
+
+
+Q. How do you know when to use abstract class and when to use interface?
+Ans:- Abstract Classes:- Use abstract classes when there is an "is-a" relationship between the base class and its subclasses. 
+      Interfaces:- Use interfaces when there is no inherent "is-a" relationship, and multiple unrelated classes need to adhere to a common contract.
+
+Q. When Finally not executed?
+Ans:- When we use system.exit then finally will not execute.
+
+Q. Difference between hashmap and hashtable?
+Ans:- HashMap and HashTable are both key-value storage classes in Java. HashMap is non-synchronized, making it faster for single-threaded tasks, while HashTable is inherently synchronized, providing thread safety. 
+
+HashTable doesn't allow any null keys or values, but HashMap lets you have one null key and several null values.
+
+Q. Difference Between ArrayList vs LinkedList?
+Ans:- ArrayList uses an array, which allows for fast random access but slow insertion and deletion. While LinkedList uses a doubly linked list, which allows for fast insertion and deletion but slow random access.
+
+Q. Difference Between Equals And == In Java?
+Ans:- 1. `equals()` method compares the content of objects, while `==` operator compares their memory addresses. 
+      2. The `equals()` method can be overridden to provide customized comparison logic, whereas `==` operator cannot be overridden.
+
+Q. How To Create an Immutable Class in Java?
+Ans:- 1) Declare the class as final so it can’t be extended.
+2) Make all of the fields private so that direct access is not allowed.
+3) Don’t provide setter methods for variables.
+4) Make all mutable fields final so that a field’s value can be assigned only once.
+
+Q. Inversion of Control in Spring?
+Ans:- Spring IoC (Inversion of Control) Container is the core of Spring Framework. It creates the objects, configures and assembles their dependencies, manages their entire life cycle. The Container uses Dependency Injection(DI) to manage the components that make up the application. It gets the information about the objects from a configuration file(XML) or Java Code or Java Annotations and Java POJO class. These objects are called Beans. Since the Controlling of Java objects and their lifecycle is not done by the developers, hence the name Inversion Of Control. 
+
+
+Q. Difference between Jar and War files?
+Ans:- the main difference between a JAR and a WAR file is their intended use: JAR files are used for packaging and distributing standalone Java applications or libraries, while WAR files are used for packaging and distributing web applications.
+
+Q. Spring Profile?
+Ans:- Spring Profiles provide a way to segregate parts of your application configuration and make it be available only in certain environments.
+We have different environment in application like Dev, Production. So Profile is used for conditional purpose. Like for Dev we want to use a different instance of the class AND for Production environment we want to use another instance of the class.
+
+Q. What is service discovery in microservices?
+Ans:- Service discovery involves automatically discovering and locating services and devices on the network. The networking standard used is SDP (service discovery protocol), which can help clients identify resources on a network. 
+
+Q. How services communicate with each other in microservices?
+Ans:- Microservices often communicate through the HTTP protocol, which allows them to interact with each other using standard HTTP methods like 'GET, POST, PUT, and DELETE. ' This 'RESTful API' communication ensures decoupled services and platform independence.
+
+Q. How you monitor services in microservices?
+Ans:- By using Spring Admin and Actuator.
+
+Q. What is Actuator?
+Ans:- Spring Boot provides an actuator dependency that can be used to monitor and manage your Spring Boot application. First we need to add the Actuator jar (Spring boot actuator). There are multiple endpoints in actuator like status (to check the status of the microservice, like 200 for OK status), health etc. By /actuator and /actuator/health endpoints you can achieve the purpose of monitoring.
+
+
+************************************************************************************************************************************************************
+
+
+Q. What is Encapsulation Java?
+Ans:- It is basically wrapping up data. For ex: there is a class Employee where salary is an instance and getSalary is method. We wrap up both into one single class Employee. This is Encapsulation.
+
+Q. Why Java doesn't support multiple inheritance?
+Ans:- Because of complexity java doesn't support multiple inheritance. For ex: If class A and class B have print methods, And class C extends class A and B both, then C got confused which print method to use. It becomes more complex. 
+
+Q. Metaspace in java?   
+Ans:- Metaspace is a new memory space – starting from the Java 8 version; it has replaced the older PermGen memory space. It is used to store metadata such as class definitions, method data, and field data. Unlike the heap, Metaspace is allocated out of the native memory, and its size is not fixed but can increase dynamically, which helps prevent the OutOfMemoryErrors that were possible with the Permanent Generation.
+
+Q. What is serialization in java?
+Ans:- Serialization in Java allows us to convert an Object to stream (byte stream) that we can send over the network or save it as file or store in DB for later usage. Deserialization is the process of converting Object stream to actual Java Object to be used in our program. Serialization in Java helps transport the code from one JVM to another and then de-serialize it there.
+
+Q. How can we not make some variable (where other variables are make serializable) not serializable in java?
+Ans:- You just need to make that one transient . mark the variable as transient , as Transient variables are not serialized. Sometime it is required that some field we do not want to serialize during network stream.
+
+Q. How can we check palindrom in a string?
+Ans:- We can reverse the String using String buffer and builder. Then By comparing original and reverse string we can check palindrom.
+
+Q. Why we need to use spring framework?
+Ans:- Spring is widely considered to be a secure, low-cost and flexible framework that improves coding efficiency and reduces overall application development time through efficient use of system resources. Spring removes tedious configuration work so that developers can focus on writing business logic.
+
+Q. What is the life cycle of beans in Spring?
+Ans:- The life cycle of a bean in Spring can be implemented using initialization and destruction callbacks. Developers can define methods annotated with @PostConstruct and @PreDestroy for custom initialization and cleanup tasks, ensuring proper initialization and disposal of beans managed by the Spring container.
+
+Q. What is transactions in Spring?
+Ans:- Transaction in Spring can be handled in two ways. One is Programatic way and the the other one is declarative way. In Programatic way We need to write the code for transactions to commit and for roll back of the transaction. In Declarative transaction we declare transaction in XML file, So if there is any runtime excpetion because of which we need to roll back our transaction then Spring automatically roll back the transaction.
+
+Q. What is starter dependency in spring boot?
+Ans:- Starters are a set of convenient dependency descriptors that you can include in your application. You get a one-stop-shop for all the Spring and related technology that you need, without having to hunt through sample code and copy paste loads of dependency descriptors.
+
+Q. If I don't want to use Tomcat as server then what should I do?
+Ans:- In Application.properties we can change the server from Tomcat to Jetty. Also we need to add dependency of Jetty in Pom.xml.
+
+Q. Why we use swagger?
+Ans:- Swagger allows you to describe the structure of your APIs so that machines can read them. The ability of APIs to describe their own structure is the root of all awesomeness in Swagger. Why is it so great? Well, by reading your API's structure, we can automatically build beautiful and interactive API documentation.
+
+********************************************************************************************************************************************************
+
+Q. What is the difference between fail-fast and failsafe?
+Ans:- Iterators in Java are used to iterate over the Collection objects. Fail-Fast iterators immediately throw ConcurrentModificationException if there is a structural modification of the collection. Structural modification means adding, or removing any element from a collection while a thread is iterating over that collection. Iterator on ArrayList and HashMap classes are some examples of fail-fast Iterator.
+
+Fail-Fast --> ConcurrentModificationException is thrown while modifying the object during the iteration process. Fail-Fast needs less memory during the process. Fail-Fast does not allow modification during the process of iteration. ArrayList, Vector, HashMap, HashSet, etc.
+
+Fail-Safe --> No Exception is thrown. Fail-Safe iterator requires more memory during the process. Fail-Safe allows modification during the process of iteration. ConcurrentHashMap, CopyOnWriteArrayList, etc.
+
+Q. What will happen if you use HashMap in a multithreaded Java application?
+Ans:- In a multi-threaded environment, if multiple threads alter the map structurally, such as adding, removing, or modifying mappings, the internal data structure of HashMap may become corrupted and there may be some missing links, incorrect entries, and the map itself may become completely useless. Thus, you should not use HashMap in a concurrent application; instead, use ConcurrentHashMap or Hashtable which is thread-safe. The ConcurrentHashMap includes all the Hashtable’s methods as well as full concurrency of retrievals and updates.
+
+*********************************************************************************************************************************************************
+
+Q. Cons of Microservice?
+Ans:- Management of large number of microservice is difficult. Communication between microservices is complex. Increased efforts for configuration and other opertions. Microservices will need a large team size with right mix of experience in design, development, automation, deployments, tools and testing.
+
+Q. Is Microservice Polyglot in nature?
+Ans:- Yes. Because we can use different programming language in different microservices of application. For ex: in microservice1 we can use java and in microservice2 we can use python. Also different versions of same language can also be used in different microservices.
+
+Q. What is the difference between Monolithic, SOA(Service Oriented Architecture) and Microservice Architecture?
+Ans:- Monolithic architecture is similar to a big container wherein all the software components of an application are assembled together and tightly packed.
+SOA is a collection of services which communicate with each other. The communication can involve either simple data passing or it could involve two or more services coordinating some activity.
+Microservice Architecture is an architectural style that structures an application as a collection of small autonomous services modeled around a business domain.
+Main diff between SOA and Microservice is based on sharing of data and info. SOA shares and reuses as much as possible while microservice focuses on sharing as little as possible.
+
+Q. How to design and implement a Microservice?
+Ans:- Start with a monolith one. Then show this one to client and after getting approval make a team and organize everything. Then split the monolith one to build a Microservice Achitecture. After building the architecture make sure about things like how all microservices will communicate between each other. Then Emphasize monitoring to ease microservice testing. Always use CI/CD to make deployment process easy. 
+
+Q. What is CI/CD?
+Ans:- CI/CD, which stands for continuous integration and continuous delivery/deployment. Use CI/CD to automate your software development workflows and deploy better quality code, more often. Using a continuous and iterative process to build, test, and deploy helps avoid bugs and code failures.
+
+Q. Provide a scenerio when you prefer Microservice over Monolithic and vice versa?
+Ans:- When we prefer Microservice --- For example we are going to build a E-Commerce website. there we use microservice. Reasons are -->
+a) Scalability
+b) Flexibility (We can use different programming language for different microservices.
+c) Team Structure
+d) Development valocity
+e) Complexity
+f) Maintenance
+
+When we prefer Monolithic --- For example we are going to make book review app, where user read the book and give the review. It is simple app. So to make it simple we use monolithic. Reasons are -->
+a) Development speed
+b) Limited Complexity
+c) Resource Constraint (When we have less budget for resource)
+d) Performance
+e) Team size
+f) Learning curve
+
+Q. How do you make sure a microservice based application can handle more users as it become more popular?
+Ans:- a) Load balancing --> for eg: suppose In Amazon, Flipkart, in normal days they have less traffic but during any sale they have more crowd. So to handle that microservice is best.
+b) Auto Scaling --> It means now a days cloud based apps automatically scales instances. When more traffic in apps they give more instance to handle and when traffic starts decreasing they remove instances automatically.
+c) Database Scaling 
+
+**********************************************************************************************************************************************************
+
+JAVA 8 Interview Questions
+
+Q. What is Lambda expression?
+Ans:- Lambda expression is introduced in Java 1.8. It is an anonymous function. It has no return type, no modifier. Lambdas are used to work with functional programming.
+
+Q. What is Functional interface?
+Ans:- It is a Single Abstruct Method interface. It contains only one abstruct method. We can write any number of default and static methods in Functional interface. We use @FunctionalInterface annotation to represent it. For example - Runnable, Callable.
+
+Q. What is Method reference in Java 8?
+Ans:- It is a shortened version of lambda expression calling a specified method. Types of method are listed below -->
+   Type                           Syntex
+a) Reference to static method --> ContainingClass :: static method name
+b) Reference to an instance method of a particuler object --> containingObject :: InstanceMethodName                            
+c) Reference to an instance method of an arbitrary object of a particuler type -->  containingType :: methodName
+d) Reference to a constructor -->  classname :: new
+
+Q. What is Optional?
+Ans:- Optional is used to handle null pointer exception in Java application.
+
+Q. Why Stream API is required?
+Ans:- Stream API is sequence of elements from a source like Collection, Array which is used to perform complex operation on data. Operations like filtering, mapping, sorting etc.
+
+Q. What is collectors in Java 8?
+Ans:- Collectors is a final class in Java that extends object class. Java collectors class provides various methods to deal with elements like summarizing elements according to various criteria. Example:- stream.map().collect(Collectors.toList()).
+
+Q. Difference between Map and Flat Map?
+Ans: a) Map() method performs only mapping. Whereas flatMap() methods performs mapping as well as flattening.
+ b) Mapper function produces single value for each input. Whereas Flat map produces multiple values for each input. 
+ c) It is a one to one mapping. Whereas Flat map is one to many mapping. 
+
+Q. What are the core API classes for date and time in Java 8?
+Ans:- -LocalDate
+      -LocalTime
+      -LocalDateTime
+
+Q. Is it possible to add a static method to an interface using Java 8?
+Ans:- Yes.
+
+Q. What is Consumer in Java 8?
+Ans:- A Consumer is a single argument functional interface present in Java 8.
+
+Q. What are the some examples of terminal operations in Java 8?
+Ans:- count(), min(), max(), reduce(), toArray(), anyMatch(), allMatch().
+
+Q. How to find and remove the duplicates using Java 8?
+Ans:- By using distinct(). for example:- stream().distinct()
+
+Q. What is easiest way to convert an array into a stream in Java 8?
+Ans:- By using of() method. For example:-
+  String[] test = {"hi","hello","bye"};
+  Stream<String> str = Stream.of(test);
+  str.forEach(System.out :: println);
+
+Q. Difference between collection and stream?
+Ans:- a) Collection is used to store and group the data in a particuler data structure. Whereas Stream is used to perform complex operations on data like filetering, mapping etc.
+b) Collections have to be iterated externally. Whereas Streams have to be iterated internally.
+
