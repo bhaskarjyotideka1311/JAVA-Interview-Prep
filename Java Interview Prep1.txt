@@ -1,0 +1,110 @@
+Array and array list (when array is used and when arraylist is used)
+Linked list ( why we prefer linkedlist over arraylist)
+Constructor
+Threads in Java - dead lock
+
+Spring boot application properties (application properties.test, application unit test properties) -- it used for profiling. there is multiple environment, for example we deploy in production, but before that we have dev environment and test environment. so we give configuration over there in application properties for each profiles.)
+
+sping framework yaml
+Different configurations in spring boot
+
+Core Java
+Garbage collection (-- we can not forcefully do garbage collection method)
+
+Finalised method in garbage collection (-- here it is used for clean up activity)
+
+Spring literals - constant pool - immutable
+
+if question -- sysout(1+2+"welcome"+5+6) -- output -> 3wlecome56 {before string it it is treated as integer, after string it is treated as string for numbers also}
+
+Strings in Java - buffer - builder  (which is more efficent?)  ---> buffer is thread safe and syncronized. builder is not thread safe so it is not taking time and execution is more faster.
+
+Exceptions - checked (-- it is checked at compile time for eg: file not found exception. we get the error at compile time) - runtime (-- error got at runtime, for example arithmatic exception. it is also called as unchecked exception)
+
+Handling exceptions  (-- try catch and user define exception(by using throw keyword))
+
+Comparable (-- it is used for single sorting. for example, if we want to sort by empId only) & comparator (-- it is used for multiple sorting sorting. for example, if we want to sort by empId, name, salary)
+We use comparator than comparable when we want to pass the comparation logic.
+  
+Singleton class (-- where only on object is created. by making construction private we make singleton. We do this so that no one can create new object by using new keyword. Also if we have static method.)
+
+Java 8. use of Lambda? (-- The three primary reasons why we need Java Lambda expressions are as follows: Lambda converts the code segment into an argument. It is a method that can be created without instantiating a class. Lambda can be treated as an Object.)
+
+Optional (-- it is used to avoid null pointer exception. if in one scenerio if the object may be null then we can use optional. isPresent, isEmpty are methods inside Optional class)
+
+SQL connection (how it is coonected to database in the project?) 
+How JDBC is used to coonect with database? (-- first we register the driver, then by creating the connection, passing query for execution and after that we close the connection and connected to the database.)
+
+Pom.xml (-- it is a file where we add the dependency. if we give the dependency in pom.xml it will download it from internet or other environment.)
+
+Tools to used for commit code? if want to change one application code, then how you get it from git? (-- first we create one folder in my local machine. Then by giving git clone command we will clone the code from remote repository to my local repository)
+
+-----------------------------------------------------------------------------------------------------------
+
+
+Q. Why strings are immutable and final in java?
+Ans:- Security. Multithreading. If one reference variable change its value, then it will be affected by all the other reference variables.
+
+Q. C++ vs Java?
+Ans:- C++ --> Platform dependent. Supports multiple inheritance. Operator overloading. No built-in support for thread.
+ 
+Java --> Platform Independent. No multiple inheritance. No Operator overloading. Built-in support for thread.
+
+
+Q. Story points in Agile.
+Ans:- Story points in Agile is a measurement that developers use instead of hours. Where as story is a feature that need to make by the developer. 
+
+
+Q. JDK vs JVM vs JRE
+Ans:- JDK  --> JRE + Development tools(Java, Javac). develop and run
+      JVM  --> Interpreter part of both JDK and JRE. To run java program line by line.
+      JRE  --> Only run java application.
+
+Q. Why Java is not fully object oriented?
+Ans:- In java we support int, float, double data types, which are nor object oriented.
+
+Q. Method overloading vs Method Overriding?
+Ans:- Method overloading means change in function signature. Where as Method overriding means inheretance.
+
+Q. JPA vs Hibernate?
+Ans:- JPA:- It is like an interface and have no concrete implementation of it to use functions which are in JPA.
+Hibernate:- It is just a JPA provider which have implementation of the functions in JPA and can have some extra functions which might not be there in JPA.
+
+Q. Spring vs Spring Boot?
+Ans:- Spring --> Dependency Injection. We need to set up the servers explicitly. No support for in memory database.
+Spring Boot --> Spring Boot is a module of Spring framework. Autoconfiguration. Embedded Server. In-memory database.
+
+Q. Agile vs Scrum?
+Ans:- Agile --> Agile is a development methodology. In Agile the leadership plays the vital role.
+Scrum --> Scrum is the one of the implementation of Agile. In which incremental builds are delivered to the customer in every two or three weeks of time. Scrum fosters a self organizing, cross functional team.  
+
+Q. How to overload and Override the Main method in Java?
+Ans:- We cannot Override the main method, because we cannot override static method. 
+We can Overload main method.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

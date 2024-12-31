@@ -1,0 +1,587 @@
+
+
+What is Web Services?
+Web services are the types of internet software that uses standardized messaging protocol over the distributed environment. 
+It integrates the web-based application using the REST, SOAP, WSDL, and UDDI over the network. 
+For example, Java web service can communicate with .Net application.
+
+
+Features of web Services
+Web services are designed for application to application interaction.
+It should be inter-operable.
+It should allow communication over the network.
+
+
+Components of Web Services
+The web services must be able to fulfill the following conditions:
+a. The web service must be accessible over the internet.
+b. The web service is discoverable through a common mechanism.
+c. It must be interoperable over any programming language or Operating System.
+
+Uses of Web Services
+1. Web services are used for reusing the code and connecting the existing program.
+2. Web services can be used to link data between two different platforms.
+3. It provides interoperability between disparate applications.
+
+
+
+
+Key of Web Services
+
+
+Request and Response: Request is the input to a web service, and the response is the output from a web service.
+
+***********************
+
+
+Message Exchange Format: It is the format of the request and response. 
+
+***************          There are two popular message exchange formats: XML and JSON.
+
+
+Service Provider or Server: Service provider is one which hosts the web service.
+
+************************
+
+Service Consumer or Client: Service consumer is one who is using the web service.
+
+********************
+RESTful Web Services
+============
+a. REST stands for REpresentational State Transfer. 
+b. It is developed by Roy Thomas Fielding who also developed HTTP. 
+c. The main goal of RESTful web services is to make web services more effective. 
+d. RESTful web services try to define services using the different concepts that are already present in HTTP. 
+e. REST is an architectural approach, not a protocol.
+f. It does not define the standard message exchange format. 
+g. We can build REST services with both XML and JSON. 
+h. JSON is more popular format with REST. 
+i. The key abstraction is a resource in REST. A resource can be anything. It can be accessed through a Uniform Resource Identifier (URI).
+
+ 
+
+The important methods of HTTP are:
+GET: It reads a resource.
+PUT: It updates an existing resource.
+POST: It creates a new resource.
+DELETE: It deletes the resource.
+
+ 
+
+RESTful Service Constraints
+a. There must be a service producer and service consumer.
+b. The service is stateless.
+c. The service result must be cacheable.
+d. The interface is uniform and exposing resources.
+e. The service should assume a layered architecture.
+
+
+SOAP: 
+SOAP acronym for Simple Object Access Protocol. 
+It defines the standard XML format. 
+It also defines the way of building web services. 
+We use Web Service Definition Language (WSDL) to define the format of request XML and the response XML.
+SOAP defines the format of request and response.
+SOAP does not pose any restriction on transport. 
+We can either use HTTP or MQ for communication.
+In SOAP, service definition typically done using Web Service Definition Language (WSDL). 
+WSDL defines Endpoint, All Operations, Request Structure, and Response Structure.
+
+
+
+SOAP Protocol vs    RESTful Web Services
+SOAP is a protocol but REST is an architectural approach.
+SOAP acronym for Simple Object Access Protocol but    REST acronym for REpresentational State Transfer.
+In SOAP, the data exchange format is always XML.    There is no strict data exchange format. We can use JSON, XML, etc.
+XML is the most popular data exchange format in SOAP web services.    JSON is the most popular data exchange format in RESTful web services.
+
+Annotations:
+@Controller
+This annotation is used to make a class as a web controller, which can handle client requests and send a response back to the client. 
+This is a class-level annotation, which is put on top of your controller class. 
+Similar to @Service and @Repository it is also a stereotype annotation.
+
+ 
+
+@RestController
+This is a convenience annotation for developing a RESTful web service with the Spring MVC framework. 
+The @RestController is a combination of @Controller and @ResponseBody, which was introduced in the Spring 3.4 version.
+
+
+When you annotate a controller class with @RestController it does two purposes, first, it says that the controller class is handling a request
+for REST APIs and second you don't need to annotate each method with the @ResposneBody annotation to signal that the response will be 
+converted into a Resource using various HttpMessageConverters.
+
+@RequestParam
+This is another useful Spring MVC annotation that is used to bind HTTP parameters into method arguments of handler methods. For example, if you send query parameters along with 
+URLlikie for paging or just to supply some key data then you can get them as method arguments in your handler methods.
+http://localhost:8080/books?id=900083838
+
+ 
+
+
+@PathVariable
+This is another annotation that is used to retrieve data from the URL. Unlike @RequestParam annotation which is used to extract query parameters, this annotation enables the controller to 
+handle a request for parameterized URLs like URLs that have variable input as part of their path like:
+http://localhost:8080/books/900083838
+
+ 
+
+@RequestMapping(value="/books/{ISBN}", method= RequestMethod.GET) 
+public String showBookDetails(@PathVariable("ISBN") String id, Model model){ 
+model.addAttribute("ISBN", id); return "bookDetails"; 
+}
+
+ 
+
+ 
+
+@RequestBody
+This annotation can convert inbound HTTP data into Java objects passed into the controller's handler method. 
+Just as @ResponseBody tells the Spring MVC to use a message converter when sending a response to the client, the @RequestBody annotations tell the Spring to find a suitable message
+ converter to convert a resource representation coming from a client into an object.
+@RequestMapping(method=RequestMethod.POST, consumers= "application/json") 
+public @ResponseBody Course saveCourse(@RequestBody Course aCourse){ 
+return courseRepository.save(aCourse); 
+}
+
+
+@ResponseBody
+The @ResponseBody annotation is one of the most useful annotations for developing RESTful web service using Spring MVC. 
+This annotation is used to transform a Java object returned from a controller to a resource representation requested by a REST client. 
+It can completely bypass the view resolution part.
+
+*****A request body is data sent by the client to your API. A response body is the data your API sends to the client.*****
+ 
+*****@Controller is used to declare common web controllers which can return HTTP response but @RestController is used to create controllers for REST APIs which can return JSON.*****
+
+*****When you use ResponseEntity, you have full control about the contents of your response. You can change your headers, status code, ... When you don't use ResponseEntity as the return type 
+of a controller method, spring will "automagically" create a default ResponseEntity.******
+
+*****RequestMapping annotation is used to map web requests onto specific handler classes and/or handler methods. *****
+
+
+////////Important at the end..///////////
+
+
+@RequestMapping(method=RequestMethod.POST,consumers= "application/json") 
+public @ResponseBody Course saveCourse(@RequestBody Course aCourse){ 
+return courseRepository.save(aCourse); 
+}
+
+
+
+
+What are Microservices?
+
+A microservice, also known as the microservice architecture, is an architectural style that structures an application as a collection of services. Benefits of the microservice architecture are as 
+follows:
+
+► Small modules
+
+► Loosely coupled
+
+► Independently deployable
+
+► Faster defect isolation
+
+The microservice architecture enables the rapid, frequent, and reliable delivery of large, complex applications. 
+
+It also enables an organization to evolve its technology stack. 
+
+Apart from this, the microservice architecture helps us to achieve continuous delivery and integration.
+
+Advantages of using microservice architecture −
+
+ Easy to maintain − Microservices are small in size and are supposed to handle only single business task. 
+
+So, they are simple to develop and maintain.
+
+ 
+Independent Scaling & Deployment − Microservices have their individual deployment pattern and cadence. 
+
+So, each service can be scaled based on the load which that service is supposed to cater to. 
+
+Each service can be deployed based on its schedule.
+
+ 
+Independent Technology Usage − Microservices have their code base segregated from the deployment environment, 
+
+so the language and the technology that a microservice needs to use can be decided based on the use-case. 
+
+There is no need to have a common stack to be used in all microservices.
+
+
+Spring Cloud :::::::::::::::
+
+Spring Cloud is a framework for building robust cloud applications.
+
+provides a solution to the commonly encountered patterns when developing a distributed system.
+
+Spring Cloud framework provides tools for developers to quickly build both cloud applications and microservice-based applications.
+
+ 
+Spring Cloud provides a collection of components which are useful in building distributed applications in cloud. 
+
+We can develop these components on our own, however that would waste time in developing and maintaining this boilerplate code.
+
+
+Using Spring Cloud, a developer can quickly develop services and applications that implement the design patterns that work well in any distributed environment. 
+
+Spring Cloud is not a single-unit project, but a group of projects for managing the challenges of development of cloud-native systems. 
+
+Some important projects are the following:
+
+ 
+
+► Spring Cloud Config
+
+► Spring Cloud Netflix
+
+► Spring Cloud Bus
+
+► Spring Cloud Sleuth
+
+► Spring Cloud Kubernetes
+
+
+Benefits of Using Spring Cloud
+
+1. Developers focus on Business Logic − Spring Cloud provides all the boilerplate code to implement common design patterns of the cloud. Developers thus can focus on the business logic 
+without the need to develop and maintain this boilerplate code.
+
+2. Quick Development Time − As the developers get the boilerplate for free, they can quickly deliver on the required projects while maintaining code quality.
+
+3. Easy to use − Spring Cloud projects can easily be integrated with existing Spring Projects.
+
+4. Active Project − Spring Cloud is actively maintained by Pivotal that is the company behind Spring. So, we get all the new features and bug-fixes for free just by upgrading the Spring Cloud
+ version.
+
+
+
+Spring Cloud Netflix : the most popular project that is part of Spring Cloud. 
+
+It provides Netflix OSS integrations for Spring Boot apps through auto-configuration and binding to the Spring Environment. With a few simple annotations, you can quickly enable and 
+configure the common patterns inside your application and start building large distributed systems.
+
+Component                                Spring Cloud Netflix
+
+Service Discovery Server                Eureka Netflix
+
+Edge Server, API Gateway                Netflix Zuul
+
+Dynamic Routing & Load Balance            Netflix Ribbon
+
+Circuit Braker                            Netflix Hystrix
+
+
+Service Discovery - Netflix Eureka
+
+In distributed computing, there is a concept called Service Discovery and Registration.
+
+This dedicated server is responsible for maintaining the registry of all the microservices that have been deployed and removed.
+
+Think of it as a lookup service where microservices (clients) can register themselves and discover other registered microservices. 
+
+When a client microservice registers with Eureka, it provides metadata such as host, post, and health indicators thus allowing other microservices to discover it. 
+
+The discovery server expects a regular heartbeat message from each microservice instance. 
+
+If an instance begins to consistently fail to send a heartbeat, the discovery server will remove the instance from its registry. 
+
+This way we will have a very stable ecosystem of microservices collaborating with each other. 
+
+Also, we don’t have to manually maintain the address of other microservices.
+
+
+
+Edge Server - Netflix Zuul
+
+ 
+
+Zuul is the front door for all requests from devices and websites to the backend. 
+
+As an edge service application, Zuul is built to enable dynamic routing, monitoring, resiliency, and security.
+
+Routing is an important part of a microservice architecture.
+
+Zuul also provides a well-known entry point to the microservices in the system. 
+
+Using dynamically allocated ports is convenient to avoid port conflicts and to minimize administration, but it makes it harder for any given service consumer.
+
+In order to build a Zuul gateway, the microservice that handles the UI needs to be enabled with zuul config. 
+
+We have to add :
+
+a. spring-cloud-starter-zuul dependency 
+
+b. enable it in Spring Boot’s main class using Everyone
+
+
+The advantage of this type of design is that those common aspects like CORS, authentication, and security can be put into a centralized service so that all common aspects are applied on 
+each request. 
+
+Furthermore, with Zuul, we can implement any routing rules or any filter implementation.
+
+ 
+Zuul has mainly four types of filters that enable us to intercept the traffic in a different timeline of the request processing for any particular transaction. 
+
+We can add any number of filters for a particular URL pattern.
+
+ 
+► Pre filters are invoked before the request is routed
+
+► Post filters are invoked after the request has been routed
+
+► Route filters are used to route the request
+
+► Error filters are invoked when an error occurs while handling the request
+
+
+
+##application property of eureka server
+
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
+server.port=8761
+spring.application.name=eureka
+
+
+#13/4/23
+
+Api Gateway 
+
+An API gateway is programming that sits in ... by Sanyal, Dibakar (Cognizant)
+Sanyal, Dibakar (Cognizant)
+15:33
+
+An API gateway is programming that sits in front of an API ( Application Programming Interface) and is the single-entry point for defined back-end APIs and microservices (which can be 
+both internal and external).
+
+ 
+
+Sitting in front of APIs, the gateway acts as protection, administering security and scalability, and high availability. 
+API Gateway takes all API requests from a customer, determines which services are demanded, and combines them into a unified, flawless experience for users.
+
+ 
+
+Advantages of API Gateway
+-----------------------------------
+It improves the security of the microservices as we limit the access of external calls to all our services.
+The cross-cutting concerns like authentication, monitoring/metrics, and resiliency will be needed to be implemented only in the API Gateway as all our calls will be routed through it.
+
+ 
+
+The client does not know about the internal architecture of our microservices system. The client will not be able to determine the location of the microservice instances.
+
+ 
+
+Simplifies client interaction as he will need to access only a single service for all the requirements.
+
+ 
+
+
+Spring Cloud Gateway Architecture
+================================
+Spring Cloud Gateway is API Gateway implementation by the Spring Cloud team on top of the Spring reactive ecosystem. It consists of the following building blocks-
+
+ 
+
+Route: Route the basic building block of the gateway. It consists of an ID, destination URI Collection of predicates, and a collection of filters. A route is matched if the aggregate predicate
+ is true.
+
+ 
+
+Predicate: This is similar to Java 8 Function Predicate. Using this functionality we can match HTTP requests, such as headers, URLs, cookies, or parameters.
+
+ 
+
+Filter: These are instances of Spring Framework GatewayFilter. Using this we can modify the request or response as per the requirement.
+
+
+
+
+
+REACT
+
+=====================Forms
+
+ 
+
+The form has the default HTML form behavior of browsing to a new page when the user submits the form. If you want this behavior in React, it just works. 
+But in most cases, it’s convenient to have a JavaScript function that handles the submission of the form and has access to the data that the user entered into the form. 
+The standard way to achieve this is with a technique called “controlled components”.
+
+Controlled Components
+In HTML, form elements such as <input>, <textarea>, and <select> typically maintain their own state and update it based on user input. In React, mutable state is typically kept in the state property of components, and only updated with setState().
+
+We can combine the two by making the React state be the “single source of truth”. 
+Then the React component that renders a form also controls what happens in that form on subsequent user input. 
+An input form element whose value is controlled by React in this way is called a “controlled component”.
+
+Make a js as component for the form as : Contact.js
+
+import React from 'react';
+
+[Wednesday 16:35] Sanyal, Dibakar (Cognizant)
+
+
+
+
+Routing ::::
+
+
+
+
+
+
+
+[Wednesday 16:35] Sanyal, Dibakar (Cognizant)
+
+
+
+
+React Router
+
+Routing is a process in which a user is directed to different pages based on their action or request.
+
+ 
+
+ReactJS Router is mainly used for developing Single Page Web Applications. 
+
+React Router is used to define multiple routes in the application. 
+
+When a user types a specific URL into the browser, and if this URL path matches any 'route' inside the router file, the user will be redirected to that particular route.
+
+ 
+
+React Router is a standard library system built on top of the React and used to create routing in the React application using React Router Package. 
+
+It provides the synchronous URL on the browser with data that will be displayed on the web page. 
+
+It maintains the standard structure and behavior of the application and mainly used for developing single page web applications.
+
+Concept: React router provides four components to manage navigation in React application.
+
+ 
+Router − Router is the top level component. It encloses the entire application.
+
+Link − Similar to anchor tag in html. It sets the target url along with reference text.
+
+ 
+
+<Link to="/">Home</Link>
+
+Here, to attribute is used to set the target url.
+
+ 
+
+Routes & Route − Both are used together. Maps the target url to the component. 
+
+Routes is the parent component and Route is the child component.
+
+Routes component can have multiple Route component and each Route component mapping a particular url to a component.
+
+ 
+
+<Routes>
+
+   <Route path="/" element ={ <Home />} >
+
+   </Route>
+
+   <Route path="/home" element ={ <Help />} >
+
+   </Route>
+
+   <Route path="/list" element ={ <ExpenseEntryItemList />} >
+
+    </Route>
+
+</Routes>
+
+Here, path attribute is used to match the url.
+
+
+fetch data from an API in ReactJS 
+----------------------------
+ReactJS is a declarative, efficient, and flexible JavaScript library for building user interfaces. 
+ReactJS is an open-source, component-based front-end library responsible only for the view layer of the application. 
+It is maintained by Facebook.
+
+ 
+
+API is an abbreviation for Application Programming Interface which is a collection of communication protocols and subroutines used by various programs to communicate between them. 
+A programmer can make use of various API tools to make its program easier and simpler. 
+API facilitates the programmers with an efficient way to develop their software programs.
+
+
+******************************************************************************************************************************************************
+
+Enumerator : An enumeration (enum for short) in Java is a special data type which contains a set of predefined constants. You'll usually use an enum when dealing with values that aren't required to change, like days of the week, seasons of the year, colors, and so on.
+
+Predicate : Generally predicate means a statement that determines whether a value could be true or false. In programming predicates mean functions with one argument that return a boolean value. It is used in java8 in functional interface.
+
+Iterator : Iterator in Java is an object used to cycle through arguments or elements present in a collection. It is derived from the technical term “iterating,” which means looping through.
+
+Default method : In a typical design based on abstractions, where an interface has one or multiple implementations, if one or more methods are added to the interface, all the implementations will be forced to implement them too. Otherwise, the design will just break down.
+
+Default interface methods are an efficient way to deal with this issue. They allow us to add new methods to an interface that are automatically available in the implementations. Therefore, we don't need to modify the implementing classes.
+
+Static method : A static method is a method that belongs to a class rather than an instance of a class. This means you can call a static method without creating an object of the class. Static methods are sometimes called class methods.
+
+lambda function : A lambda expression is a short block of code which takes in parameters and returns a value. Lambda expressions are similar to methods, but they do not need a name and they can be implemented right in the body of a method.
+
+SringBuffer : The StringBuffer class is used to represent characters that can be modified. The significant performance difference between these two classes is that StringBuffer is faster than String when performing simple concatenations. In String manipulation code, character strings are routinely concatenated.
+
+StringBuilder : StringBuilder is a class in the Java API that provides a mutable sequence of characters. It is used for dynamic string manipulation, such as building strings from many smaller strings or appending new characters to an existing string.
+
+String is immutable whereas StringBuffer and StringBuilder are mutable classes.
+StringBuffer is thread-safe and synchronized whereas StringBuilder is not. That’s why StringBuilder is faster than StringBuffer.
+
+Map : A Map is an object that maps keys to values. A map cannot contain duplicate keys: Each key can map to at most one value. 
+         A Map cannot contain duplicate keys and each key can map to at most one value. Some implementations allow null key and null values like the HashMap and LinkedHashMap, but some do not like the TreeMap.
+
+******DateTimeFormatter for converting DateTime objects to strings.******
+
+Some of the important Java 8 features are;
+                   forEach() method in Iterable interface
+                   default and static methods in Interfaces
+                   Functional Interfaces and Lambda Expressions
+
+Functional Interface : Functional interfaces are a new concept introduced in Java 8. An interface with exactly one abstract method becomes a Functional Interface. We don’t need to use @FunctionalInterface annotation to mark an interface as a 
+                               Functional Interface.
+                               @FunctionalInterface annotation is a facility to avoid the accidental addition of abstract methods in the functional interfaces.
+
+Process and Thread : A process is an instance of a program that is being executed or processed. Thread is a segment of a process or a lightweight process that is managed by the scheduler independently. 
+                               Processes are independent of each other and hence don't share a memory or other resources. Threads are interdependent and share memory.
+
+FindAny : the findAny() method allows us to find any element from a Stream.
+FindFirst : The findFirst() method finds the first element in a Stream.
+
+autowire bytype and byname : https://findnerd.com/list/view/Difference-between-autowire-byName-and-byType-in-Spring/4466/
+
+war and jar : A JAR file is a file with Java classes, associated metadata and resources such as text, images aggregated into one file. A WAR file is a file that is used to distribute a collection of JAR files, 
+                   JSP, Servlet, XML files, static web pages like HTML and other resources that constitute a web application.
+                   WAR file (Web Application Resource or Web application ARchive)
+                   JAR stands for Java ARchive.
+
+semantic non semantic in html : A semantic element clearly describes its meaning to both the browser and the developer.
+                                              Examples of non-semantic elements: <div> and <span> - Tells nothing about its content.
+                                              Examples of semantic elements: <form>, <table>, and <article> - Clearly defines its content.
+
+optional : Optional is a new type introduced in Java 8. It is used to represent a value that may or may not be present. In other words, 
+              an Optional object can either contain a non-null value (in which case it is considered present) or it can contain no value at all (in which case it is considered empty).
+              Optional can help to reduce the number of null pointer exceptions in your code. It is not intended as a replacement for existing reference types, such as String or List, but, rather, as an addition to the Java type system.
+
+Stream : https://www.geeksforgeeks.org/stream-in-java/
+
+arrays.asList : The asList() method of java.util.Arrays class is used to return a fixed-size list backed by the specified array. This method acts as a bridge between array-based and collection-based APIs, 
+                     in combination with Collection.toArray(). The returned list is serializable and implements RandomAccess.
+
+JSP : Jakarta Server Pages (formerly JavaServer Pages) is a Java standard technology that developers use to write dynamic, data-driven web pages for Java web applications.
+
+@Mock creates a mock. @InjectMocks creates an instance of the class and injects the mocks that are created with the @Mock (or @Spy) annotations into this instance.
+
+Note you must use @RunWith(MockitoJUnitRunner.class) or Mockito.initMocks(this) to initialize these mocks and inject them (JUnit 4).
+
