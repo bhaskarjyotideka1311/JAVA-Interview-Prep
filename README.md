@@ -1,2 +1,2 @@
 # JAVA-Interview-Prep
-Java, Microservice interview question and answers.
+Java, Microservice interview questions and answers.
