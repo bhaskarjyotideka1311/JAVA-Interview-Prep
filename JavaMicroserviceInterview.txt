@@ -428,3 +428,20 @@ Q. Difference between collection and stream?
 Ans:- a) Collection is used to store and group the data in a particuler data structure. Whereas Stream is used to perform complex operations on data like filetering, mapping etc.
 b) Collections have to be iterated externally. Whereas Streams have to be iterated internally.
 
+****************************************************************************************************************************
+Q. Why sometime we create a snapshot of our application.
+Ans:- Speed: Snapshots capture the application's state at a specific point in time. This means you can quickly restore it without having to go through a lengthy installation or configuration process.
+
+Consistency: Snapshots ensure that every time you restore the application, you get the exact same state, eliminating variability and potential errors.
+
+Backup and Recovery: If something goes wrong, you can easily revert to a snapshot, ensuring minimal downtime and data loss.
+
+Testing and Development: When developing or testing applications, snapshots can help you quickly return to a known good state after experimenting or testing new features.
+
+Deployment: Deploying applications using snapshots can be faster and more reliable, especially in large-scale environments where consistency is key.
+
+Q. Example of how to create snapshot of our project?
+Ans:- Version Control Systems (VCS): Tools like Git can help create snapshots of your project. These are known as "commits." Each commit captures the state of your project at a specific point in time.
+Initialize a Git repository in your project directory.
+Use git add to stage your changes.
+Use git commit to create a snapshot of your project.
