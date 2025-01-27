@@ -445,3 +445,9 @@ Ans:- Version Control Systems (VCS): Tools like Git can help create snapshots of
 Initialize a Git repository in your project directory.
 Use git add to stage your changes.
 Use git commit to create a snapshot of your project.
+
+****************************************************************************************************************************
+
+Q. Diffrence between Collection snd Collections?
+Ans:- Collection is an Interface. List, Set, Queue. Methods - size(), add(), remove().
+Collections is a java util class. Methods - sort(), shuffle(), binarySearch().
