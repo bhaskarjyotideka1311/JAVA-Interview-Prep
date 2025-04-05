@@ -451,3 +451,81 @@ Use git commit to create a snapshot of your project.
 Q. Diffrence between Collection snd Collections?
 Ans:- Collection is an Interface. List, Set, Queue. Methods - size(), add(), remove().
 Collections is a java util class. Methods - sort(), shuffle(), binarySearch().
+
+Q. Can we print in console without using main method in java?
+Ans: Yes, by using Static Blocks. Static blocks in Java are executed when the class is loaded by the JVM, before any method (like main) is invoked.
+
+Q. Can we use multiple static block in a code. What is the use of the static block?
+Ans: Yes, you can have multiple static blocks in a Java program. These blocks will execute in the order in which they are defined in the class, from top 
+to bottom, when the class is loaded by the Java Virtual Machine (JVM). Static blocks are particularly helpful for organizing initialization logic.
+
+Q. Can we have multiple finally block in java? If yes which will execute?
+Ans: In Java, you cannot have multiple finally blocks associated with a single try block.
+
+Q. Can we include class a key in hashmap?
+Ans: In hashMap we use always immutable objects(we use wrapper class object). Class is mutable object. Nut we can use class as a key in hasmap by overriding 
+hashcode() and equals() method.
+
+Q. Reflection in java?
+Ans: Reflection in Java is a powerful feature that allows you to inspect and manipulate the runtime behavior of classes, methods, fields, and constructors. 
+It provides the ability to dynamically access and modify code during execution, which is especially useful for tasks like debugging, testing, and building 
+frameworks.
+
+Q. Can functional interface can extend another interface?
+Ans: Yes, a functional interface in Java can extend another interface(which has static and default method), including other functional interfaces. 
+For Example:
+@FunctionalInterface
+interface ParentInterface {
+    void method1();
+}
+
+@FunctionalInterface
+interface ChildInterface extends ParentInterface {
+    // No need to declare method1() again, it inherits from ParentInterface
+}
+
+
+
+Q. Scope of bin in Spring?
+Ans: Two types : 1) Singleton - Creates one instance only for the entire spring container
+2) Prototype - creates every time new instance.
+For HTTP request we REQUEST and SESSION scope as well.
+
+Q. How to implement caching in spring boot application?
+Ans: By giving cache dependency in pom.xml.
+Use the @EnableCaching annotation in your main application class to enable caching functionality.
+Apply the @Cacheable annotation on methods whose return values you want to cache. The annotation specifies the cache name.
+
+Q. What methods use when send duplicate request and it doesn't affect the server?
+Ans: To ensure that duplicate requests don't adversely affect the server, you can use idempotent methods.
+Idempotent HTTP Methods:- GET(Retrieve data), PUT(Modidfy), DELETE(Remove).
+
+Q. Difference between RequestParam and pathVariable?
+Ans: @RequestParam is used to extract query parameters from the URL in key value pair.
+Example: For the URL: http://localhost:8080/api?name=John
+@GetMapping("/api")
+public String getData(@RequestParam String name) {
+    return "Hello, " + name;
+}
+Output: "Hello, John".
+
+PathVariable is used to extract values from the URI path.
+Example: For the URL: http://localhost:8080/api/John
+@GetMapping("/api/{name}")
+public String getData(@PathVariable String name) {
+    return "Hello, " + name;
+}
+Output: "Hello, John"
+
+
+Q. @Configuration annotation?
+Ans: It is used to define configuration classes that provide bean definitions for the application context.It is
+responsible for creating and returning instances of objects (beans).
+
+
+Q. Desing pattern in spring?
+Ans: Spring Framework incorporates various design patterns to promote flexibility, scalability, and maintainability in application development.
+1. Dependency Injection Pattern (Creational Pattern)
+What It Does: Decouples the creation of an object from its usage, allowing the object to be injected into a class instead of the class instantiating it.
+2. Singleton Pattern (Creational Pattern)
+What It Does: Ensures that only one instance of a class is created and shared throughout the application.
