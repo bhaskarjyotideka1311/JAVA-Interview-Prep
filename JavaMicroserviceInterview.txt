@@ -529,3 +529,131 @@ Ans: Spring Framework incorporates various design patterns to promote flexibilit
 What It Does: Decouples the creation of an object from its usage, allowing the object to be injected into a class instead of the class instantiating it.
 2. Singleton Pattern (Creational Pattern)
 What It Does: Ensures that only one instance of a class is created and shared throughout the application.
+
+***************************************************************************************************************************
+
+Q. Difference between inheritance and interface with project real time example.
+Ans: Inheritance allows a class (subclass) to derive properties and behaviors from another class (superclass). It promotes code reuse and enables the 
+subclass to inherit fields and methods from the parent class.
+An interface defines a contract or blueprint that classes must follow. It specifies what methods a class must implement but does not provide the 
+implementation itself.
+
+
+Q. What is use of finnaly block?
+Ans: The finally block in Java (and many other programming languages) is used to ensure that a specific section of code is always executed, regardless 
+of whether an exception is thrown or caught in the try block. It's often used for cleanup operations, such as closing resources (files, database 
+connections, sockets, etc.) or releasing memory. 
+
+
+Q. If you don't close the connection in final block then what will happen? Is there any memory leak if don't close it?
+Ans: If a connection (such as a database connection or file stream) is not closed, it can lead to resource leaks and potentially cause a memory leak 
+depending on how the underlying system handles resources.
+
+
+Q. What is collection?
+Ans: collection is a framework that provides an architecture to store, manage, and manipulate a group of objects. It is part of the Java Collections 
+Framework (JCF), which includes interfaces, classes, and algorithms to handle data structures like lists, sets, queues, and maps.
+
+
+Q. Difference between collection and collections?
+Ans: Collection (Interface):
+Definition: Collection is a root interface in the Java Collections Framework. It defines the basic methods for working with a group of objects 
+(e.g., adding, removing, and iterating elements).
+Belongs To: java.util package.
+Hierarchy: Subinterfaces of Collection include List, Set, and Queue.
+It provides methods like add(), remove(), size(), iterator(), etc.
+
+Collections (Class):
+Definition: Collections is a utility class in the Java Collections Framework. It provides static methods to operate on or return collections, such 
+as sorting, searching, and thread-safe wrappers.
+Belongs To: java.util package.
+Purpose: Provides utility methods for easier manipulation of collections like List, Set, and Map.
+
+
+Q. Difference between linkedlist and arraylist?
+Ans: In LinkedList it is easy to insert or remove elements. But in ArrrayList if not easy.
+In LinkedList accessing element is slow. But in ArrayList accessing element is fast.
+
+
+Q. So you implement HashPosition isn your project and how?
+Ans: No.
+
+
+Q. What is the use of profiles in spring boot?
+Ans: This is particularly useful for handling deployment in development, testing, staging, and production environments.
+
+
+Q. What type of Spring dev tools used and worked on?
+Ans: Spring DevTools is a popular module provided by Spring Boot to improve development productivity. It helps developers create, test, and debug 
+Spring applications more efficiently. DevTools automatically restarts your application whenever code changes are detected, saving time compared to 
+manually restarting. It uses a class loader to reload changes without restarting the entire JVM.
+
+
+Q. Different types of Autowiring?
+Ans: 1. Default (No) - Manual Definition
+2. byName - Matches property name with bean name 
+3.byType - Matches property type with bean type 
+4. Constructor- Matches constructor arguments with bean types
+5. Autowired - By type or by qualifier
+
+
+Q. How to handle exceptions in Spring boot?
+Ans: 1. You can define custom methods within a controller to handle specific exceptions using the @ExceptionHandler annotation.
+2. To manage exceptions across the entire application, use @ControllerAdvice. It centralizes exception handling for multiple controllers. 
+@RestControllerAdvice manages all exceptions for the application.
+3. Custom exceptions add clarity and meaning to your application’s error handling. (public class ResourceNotFoundException extends RuntimeException)
+
+
+Q. What is the difference between SQL and HQL?
+Ans: SQL: A standard query language used to interact with relational databases (e.g., MySQL, PostgreSQL, Oracle).
+Focuses on directly querying database tables and manipulating their data.
+
+HQL:A query language used in Hibernate (an ORM framework) for interacting with objects mapped to database tables.
+Operates at the object-oriented level, querying entities rather than directly working with tables.
+
+
+Q. How do you map java application into database?
+Ans: Mapping a Java application to a database involves connecting your application to the database and managing the interaction between Java objects 
+and database tables. This is typically achieved using Object-Relational Mapping (ORM) tools like Hibernate, JPA (Java Persistence API), or frameworks 
+like Spring Data JPA.
+
+
+Q. Types of mapping. OneToOne, ManyToOne, ManyToMany, OneToMany?
+Ans: 1. One-To-One Mapping
+Definition: A relationship where one entity is associated with exactly one other entity.
+Use Case: Linking entities like User and Profile, where each user has exactly one profile, and each profile belongs to one user.
+2. One-To-Many Mapping
+Definition: A relationship where one entity is associated with multiple instances of another entity.
+Use Case: A Department having multiple Employees.
+3. Many-To-One Mapping
+Definition: A relationship where many entities are associated with a single instance of another entity.
+Use Case: Employees belonging to a single Department.
+4. Many-To-Many Mapping
+Definition: A relationship where many entities are associated with many other entities.
+Use Case: Students enrolling in multiple Courses, and Courses having multiple Students.
+
+
+Q. What is the transaction management in hibernate?
+Ans: Transaction management in Hibernate is a crucial aspect that ensures the consistency and integrity of data in a relational database. 
+It involves coordinating the sequence of operations (like saving, updating, or deleting data) within a unit of work, ensuring they either all 
+succeed (commit) or all fail (rollback).
+
+Key Concepts in Transaction Management
+ACID Properties:Hibernate transactions adhere to the ACID principles:
+Atomicity:- All operations in the transaction are treated as a single unit. Either all succeed or none.
+Consistency:- The database remains in a valid state after the transaction.
+Isolation:- Transactions are isolated from one another, preventing conflicts.
+Durability:- Changes made by committed transactions are permanently saved.
+
+Transaction Lifecycle:
+Begin:- The transaction starts and locks resources.
+Commit:- Changes are applied to the database.
+Rollback:- If something goes wrong, all changes are undone, and the database is restored to its previous state.
+
+Transaction Management with Hibernate:-
+beginTransaction() starts a transaction.
+commit() saves changes permanently.
+rollback() reverts changes if an error occurs.
+
+Using JPA with Spring Transaction Management:-
+Use the @Transactional annotation for automatic transaction handling.
