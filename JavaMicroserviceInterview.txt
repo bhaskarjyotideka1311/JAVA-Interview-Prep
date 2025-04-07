@@ -657,3 +657,11 @@ rollback() reverts changes if an error occurs.
 
 Using JPA with Spring Transaction Management:-
 Use the @Transactional annotation for automatic transaction handling.
+
+
+Q. What is dependency injection and how it helps in bean life cycle?
+Ans: Dependency Injection (DI) is a design pattern widely used in frameworks like Spring to manage the lifecycle of objects (often referred to as "beans"). 
+It allows the injection of dependencies into an object, rather than the object itself being responsible for instantiating or managing those dependencies. 
+This is particularly useful for creating loosely coupled and testable applications.
+
+It helps in bean life cycle by decoupling your bean creation and configuration.
