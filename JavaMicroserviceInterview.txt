@@ -665,3 +665,222 @@ It allows the injection of dependencies into an object, rather than the object i
 This is particularly useful for creating loosely coupled and testable applications.
 
 It helps in bean life cycle by decoupling your bean creation and configuration.
+
+*****************************************************************************************************************************
+
+
+Q. Difference between creating String with literal and new operators
+Ans: 1. Using String Literal: -
+When you create a String using a literal (e.g., String str1 = "Hello";), the JVM checks the String Pool (a part of the heap memory) to see if an equivalent 
+String already exists.
+If it does, the new variable references the existing String object.
+If not, a new String object is created in the pool, and the variable references it.
+Advantages: This approach is memory-efficient, as duplicate String objects are avoided.
+
+2. Using new Operator: -
+When you create a String using the new operator (e.g., String str2 = new String("Hello");), a new String object is created in the heap memory, even if an 
+equivalent String exists in the String Pool.
+This means it bypasses the String Pool and explicitly allocates new memory for the object.
+Drawback: It is less efficient as it can lead to duplicate String objects in memory.
+
+
+Q. What is String Pool? How it is working? 
+Ans: The String Pool is a special storage area in Java's heap memory where String literals are stored. Its purpose is to optimize memory usage and 
+improve performance by preventing the creation of duplicate String objects.
+
+
+Q. Advantages of String Pool?
+Ans: Advantages of the String Pool:
+1. Memory Efficiency
+2. Performance Boost
+3. Thread Safety
+4. Automatic Deduplication
+
+
+Q. Why String is Immutable class? 
+Ans: Immutability in Java String means once a String object is created, its value cannot be changed. Here's why:
+
+1. Security: Immutability helps protect sensitive data like database connection URLs, passwords, or keys passed as strings. Since the value cannot 
+change, it ensures consistent and secure handling.
+
+2. String Pool Compatibility: Immutability allows strings to be safely stored and reused in the String Pool. If strings were mutable, changes to one 
+reference would unexpectedly affect others sharing the same object.
+
+3. Caching and Optimization: Internally, strings are often used as keys for hash-based structures like HashMap or HashSet. Immutability guarantees 
+that the hashCode and value of a string cannot change, making it efficient and reliable as a key.
+
+4. Thread Safety: Immutability ensures that strings are inherently thread-safe, meaning multiple threads can use them 
+without synchronization or race conditions.
+
+
+Q. What are the use cases of creating User Defined Exceptions. 
+Ans: User-defined exceptions in Java are custom exceptions created by developers to handle specific scenarios that built-in exceptions cannot address 
+effectively. Here are some common use cases for creating user-defined exceptions:
+
+Domain-Specific Validation: When dealing with application-specific rules or constraints, user-defined exceptions help enforce these rules. Example: 
+Throwing a InvalidAgeException when the age entered does not meet the required criteria.
+
+
+Q. How to handle User Defined Exceptions?  
+Ans: Steps to Handle User-Defined Exceptions
+1. Create the Exception Class -
+Define your custom exception by extending the Exception class or RuntimeException class.
+2. Throw the Exception -
+Use the throw keyword to raise the exception when the specific condition occurs.
+3. Catch the Exception -
+Use a try-catch block in your code to catch the exception and handle it gracefully.
+
+Q. throw v/s throws functionality?
+Ans: throw Keyword:
+Purpose: Used to explicitly throw an exception during the execution of a program.
+Usage: Typically inside a method or block to indicate that something has gone wrong.
+Behavior: After an exception is thrown using throw, the program flow is interrupted, and the exception must be caught or propagated.
+Syntax: Requires an instance of the Throwable class (e.g., Exception or Error) to be thrown.
+Only one exception can be thrown at a time.
+
+throws Keyword:
+Purpose: Declares that a method may throw one or more exceptions. It informs the caller of the method that exceptions need to be 
+handled or propagated further.
+Usage: Added to the method signature, specifying the exception types the method might throw.
+Behavior: By using throws, the method signals that it does not handle the exception internally, leaving it for the caller to handle.
+
+
+Q. What is Stream API? Advantages of Stream API?
+Ans: The Stream API in Java is a powerful feature introduced in Java 8. It is primarily used for processing sequences of data in a 
+functional and declarative style, allowing developers to perform operations like filtering, mapping, and reducing data in collections or arrays.
+ 
+Advantages: - Streams enable efficient, readable, and concise code for bulk operations.
+
+
+Q. What is Stream Pipeline? 
+Ans: A Stream Pipeline in Java is the sequence of operations performed on a stream to process data. 
+It is composed of three main elements: a source, intermediate operations, and a terminal operation. The pipeline allows developers to process 
+collections, arrays, or other data sources in a functional and declarative style.
+
+
+Q. Intermediate v/s Terminal Operators Using Stream API?
+Ans:  Intermediate Operations: These operations transform or filter the stream's elements. They are lazy (not executed until a terminal operation 
+is called). Intermediate operations can be chained together to build the pipeline. Examples:
+filter(Predicate), map(Function), sorted(Comparator), distinct()
+
+Terminal Operation: The final operation that triggers the execution of the stream pipeline and produces a result or a side effect. Examples:
+collect(Collector), forEach(Consumer), count(), reduce(BinaryOperator)
+
+
+Q. Find 2nd highest salary from given Employee Objects List Using Stream API? 
+Ans: //FIND SECOND SMALLEST AND LARGEST
+        Integer secSmall = list.stream().distinct().sorted().skip(1).findFirst().orElse(null);
+        Integer secLargest = list.stream().distinct().sorted((i1,i2)->i2.compareTo(i1)).skip(1).findFirst().orElse(null);
+
+
+Q. Find female employes count from given Employee Objects List.
+Ans:
+public class Employee {
+    private String name;
+    private String gender;
+
+    // Constructor
+    public Employee(String name, String gender) {
+        this.name = name;
+        this.gender = gender;
+    }
+
+    // Getter for gender
+    public String getGender() {
+        return gender;
+    }
+
+    public static void main(String[] args) {
+        // List of employees
+        List<Employee> employees = Arrays.asList(
+            new Employee("Alice", "Female"),
+            new Employee("Bob", "Male"),
+            new Employee("Cathy", "Female"),
+            new Employee("David", "Male")
+        );
+
+        // Count female employees using Stream API
+        long femaleCount = employees.stream()
+                                    .filter(emp -> emp.getGender().equalsIgnoreCase("Female"))
+                                    .count();
+
+        System.out.println("Number of female employees: " + femaleCount);
+    }
+}
+
+  
+Q. What is @Qualifier annotation 
+Ans: The @Qualifier annotation in Spring Framework is used to resolve the ambiguity that arises when multiple beans of the same type are eligible 
+for dependency injection. By using @Qualifier, you can specify the exact bean you want to inject into a field, constructor, or method.
+For example: 
+@Bean
+public Service service1() {
+    return new Service();
+}
+
+@Bean
+public Service service2() {
+    return new Service();
+}
+
+@Component
+public class Client {
+    private final Service service;
+
+    @Autowired
+    public Client(@Qualifier("service1") Service service) {
+        this.service = service;
+    }
+}
+
+
+Q. What is @SpringBootApplication?
+Ans: The @SpringBootApplication annotation is a key annotation in Spring Boot that serves as a convenient shortcut for enabling various configurations 
+needed to bootstrap a Spring Boot application. It combines three commonly used Spring annotations into one:
+@Configuration
+@EnableAutoConfiguration
+@ComponentScan
+
+
+Q. How to avoid Bean Creation Failures in Dependency Injection?
+Ans:  Avoiding bean creation failures in dependency injection requires careful design, configuration, and handling of Spring beans to ensure that 
+dependencies are properly resolved. Below are some strategies and best practices to prevent such issues:
+
+1. Properly Define Bean Names
+Ensure that beans have unique names to avoid ambiguity during dependency injection.
+Use the @Qualifier annotation when multiple beans of the same type exist to specify the exact bean to inject.
+
+
+Q. What is ORM? 
+Ans: ORM (Object-Relational Mapping) is a programming technique used to simplify the interaction between object-oriented programming languages 
+and relational databases. It allows developers to map database tables to Java objects (or objects in other languages) and vice versa, enabling seamless 
+data manipulation without the need for extensive SQL queries.
+
+
+Q. What is REST API and advantages of REST API Process for Creating REST API and an example?
+Ans: REST API stands for Representational State Transfer Application Programming Interface. It is a set of rules and conventions for building and 
+interacting with web services. REST APIs use HTTP methods (like GET, POST, PUT, DELETE) to enable communication between a client and a server. The key 
+principle of REST APIs is statelessness, meaning that each request contains all the information necessary for the server to process it, without relying 
+on stored context.
+
+Advantages of REST APIs: -
+1. Scalability: REST APIs are stateless, which makes them scalable as server-side state management isn't required.
+2. Simplicity: REST APIs use standard HTTP methods, making them easy to understand and use. They leverage uniform resource identifiers (URIs) for 
+identifying resources.
+3.Flexibility: REST APIs can support multiple data formats (e.g., JSON, XML) for communication, making them adaptable to various client needs.
+
+
+Q. What is Producer and Consumer Applications?
+Ans: A producer is an application or component responsible for creating and sending data (or messages) to a shared resource, such as a message 
+queue, database, or other intermediary. It generates data to be consumed by other applications or services.
+Example Use Cases:
+An IoT device collecting temperature data and sending it to a server.
+A web application sending user activity logs to a logging system.
+
+Consumer Application: -
+A consumer is an application or component responsible for receiving and processing data created by the producer. It subscribes to the shared 
+resource (e.g., a message queue) and consumes the data when it's available.
+Example Use Cases:
+A data analytics tool processing logs from a logging system.
+An email service consuming messages from a queue and sending notifications.
+A database updater consuming stock prices for real-time updates.
