@@ -884,3 +884,175 @@ Example Use Cases:
 A data analytics tool processing logs from a logging system.
 An email service consuming messages from a queue and sending notifications.
 A database updater consuming stock prices for real-time updates.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+Caching - in memory storage. Redis is one of a caching technique. In heibernet two types of caching. One is session level caching(different caching for for every session) and other one 
+is session factory caching(same caching for all sessions. And this is singleton).  How to apply caching in your app?
+
+
+Q. GraphQL?
+Ans: GraphQL is a modern query language for APIs that allows clients to request exactly the data they need, making it more efficient and flexible than traditional REST APIs.
+
+Q. RestTemplate?
+Ans: RestTemplate is a Spring Framework class used to make HTTP requests to RESTful web services from a Java application. It simplifies client-side HTTP communication 
+by abstracting away the boilerplate code needed to send requests and handle responses.
+
+Q. Pagination?
+Ans: Pagination is the process of dividing a large set of data into smaller, manageable chunks (pages), typically used in web applications to improve performance and user experience 
+when displaying lists of items like search results, products, or database records
+Kubernetes Orchestration?
+
+Q. Transactional?
+Ans: In Java and Spring, transactional refers to executing a block of code (usually database operations) as a single unit of work that either completes entirely or rolls 
+back completely if any part fails. This ensures data consistency and integrity.
+A transaction is a sequence of operations performed as a single logical unit. It must follow the ACID properties:
+Atomicity: All operations succeed or none do.
+Consistency: Data remains valid before and after the transaction.
+Isolation: Transactions don’t interfere with each other.
+Durability: Changes persist even after system failure.
+
+
+Q. How you optimize query in hibernate or any database?
+Ans: Use indexing. It will reduce the load in backand and while fatching the data it will be helpful.
+
+Q. Why we use packages in java?
+Ans: A package is a namespace that groups related classes and interfaces together. Packages in Java are used to organize related classes and interfaces, prevent naming conflicts, and 
+improve code maintainability and access control.
+
+
+Q. what if two packages has same class name?
+Ans: We can import the package with class name. For example
+import com.company.sales.Customer   OR com.company.sales.*
+import com.company.support.Customer  OR com.company.support.*
+
+Q. Can static block means static class or method throw exception in java?
+Ans: es, static methods behave like any other method. They can throw both checked(ou must handle them with a try-catch block. ex: IO Exception) and unchecked exceptions(ex: Runtime 
+exception).
+
+
+Q.Can you override static method in java?
+Ans: No. Because Static methods belong to the class, not to instances of the class.
+
+Q. Generics in java?
+Ans: Generics in Java allow you to write flexible, reusable, and type-safe code by using parameterized types like <T>. They help avoid runtime errors and reduce the need for casting.
+
+Q. Can we use generics in array?
+Ans: Using generics with arrays in Java is possible but comes with important limitations due to how Java handles type erasure and array covariance.
+
+Q. What happens when an exception is thrown in a static initialization block?
+Ans: When an exception is thrown in a static initialization block and not caught, the class fails to initialize properly, and the Java Virtual Machine (JVM) throws an 
+ExceptionInInitializerError.
+
+
+Q. Can we throw exception in finally block?
+Ans: Yes, you can throw an exception in a finally block in Java. For Ex:
+	public static void main(String[] args) {
+        try {
+            throw new RuntimeException("From try");
+        } finally {
+            throw new RuntimeException("From finally");
+        }
+    	}
+
+
+Q. Can we determine method overloading in run time?
+Ans: No, method overloading in Java is determined at compile time, not at runtime.
+
+Q. Real time example of using final keyword?
+Ans: public class Finance {
+    public static final double TAX_RATE = 0.18;
+
+    public double calculateTax(double amount) {
+        return amount * TAX_RATE;
+    }
+}
+
+Q. Inner classes in Java?
+Ans: Inner classes in Java are classes defined within another class or interface, used to logically group code, enhance encapsulation, and improve readability.
+
+Q. What is java memory model?
+Ans: The Java Memory Model (JMM) defines how threads interact through memory and ensures consistent behavior in concurrent programming by specifying rules for visibility, 
+ordering, and atomicity of shared variables.
+
+Q. How you investigate memory leak in java?
+Ans: To investigate a memory leak in Java, you typically analyze heap usage, identify objects that aren’t being garbage collected, and trace their references using 
+profiling tools like VisualVM, Eclipse MAT, or JProfiler. 
+
+Q.Design pattern in java.
+Ans: Design patterns in Java are proven solutions to common software design problems, helping developers write flexible, reusable, and maintainable code. They are categorized 
+into creational, structural, and behavioral patterns.
+
+Pattern		Purpose
+Singleton		Ensures only one instance of a class exists.
+Factory		Creates objects without exposing instantiation logic.
+Abstract Factory	Produces families of related objects.
+Builder		Constructs complex objects step-by-step.
+Prototype		Clones existing objects instead of creating new ones.
+
+
+Q. Autoconfigure in spring boot?
+Ans: Auto-configuration in Spring Boot automatically configures your application based on the dependencies and settings present, reducing the need for manual setup.
+
+Q. Steps to integrate database in spring boot from scratch?
+Ans: 1. Add Database Dependency in pom.xml or build.gradle
+2. Configure Database in application.properties or application.yml
+3. Create Entity Class
+4. Create Repository Interface
+5. Create Service and Controller
+
+
+Q. How will you secure spring boot app?
+Ans: 1. Add Spring Security Dependency
+2. Basic Authentication (Default)
+Spring Boot auto-secures all endpoints with HTTP Basic authentication. A default user and password are generated unless overridden in application.properties:
+	spring.security.user.name=admin
+	spring.security.user.password=secret
+3. Custom Security Configuration
+Create a class that extends WebSecurityConfigurerAdapter (Spring Boot 2.x) or use SecurityFilterChain bean (Spring Boot 3.x)
+4. User Details and Roles
+Define users and roles either in-memory or via a database:
+
+public UserDetailsService userDetailsService() {
+    UserDetails user = User.withDefaultPasswordEncoder()
+        .username("user")
+        .password("password")
+        .roles("USER")
+        .build();
+    return new InMemoryUserDetailsManager(user);
+}
+5. Protect Against CSRF
+Spring Security enables CSRF protection by default. For stateless APIs, you may disable it:
+http.csrf().disable();
+6. Secure REST APIs
+Use JWT (JSON Web Tokens) for stateless authentication:
+Generate token on login
+Validate token on each request
+Use filters to intercept and verify tokens
+7. HTTPS and Headers
+Enforce HTTPS using http.requiresChannel().anyRequest().requiresSecure()
+Set security headers: http.headers().xssProtection().and().contentSecurityPolicy("script-src 'self'")
+
+Q. Difference between authorization and authentication?
+Ans: 
+Feature		Authentication						Authorization
+Definition		Verifying who the user is				Determining what the user can access
+Purpose		Confirms identity						Grants or denies permissions
+Occurs When		Before authorization					After successful authentication
+Example		Logging in with username and password		Accessing admin dashboard based on user role
+
+
+Q. How can you secure methods in class?
+Ans: To secure methods in a class in a Spring Boot application, you can use method-level security annotations provided by Spring Security.
+1. Enable Method Security
+Add this to your configuration class:
+
+@EnableMethodSecurity  // Spring Boot 3.x
+// or
+@EnableGlobalMethodSecurity(prePostEnabled = true)  // Spring Boot 2.x
+
+2. Use Security Annotations on Methods
+Annotation			Purpose
+@PreAuthorize		Checks before method execution
+@PostAuthorize		Checks after method execution
+@Secured			Restricts access based on roles
+@RolesAllowed		Similar to @Secured, uses JSR-250
