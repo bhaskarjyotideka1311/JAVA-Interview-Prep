@@ -1056,3 +1056,156 @@ Annotation			Purpose
 @PostAuthorize		Checks after method execution
 @Secured			Restricts access based on roles
 @RolesAllowed		Similar to @Secured, uses JSR-250
+
+*************************************************************************************************************************************************
+
+Q. Types of communication in microservice?
+Ans. Two types:
+Synchronous - Uses Rest template
+Asynchronous - Uses Kafka, RabitMq
+
+Q. What are features you used in API Gateway in your project?
+Ans: First we add Authentication and Authorization.
+Second Rate Limiting - It used to limit the rate means if there are so many requests coming but we can't handle more requests so we limit rate and status we kept as 429. 
+
+
+Q. In java8 we have 2 interfaces and both intefaces have same default method. Now the class is implementing both intefaces. So how jvm will know which method to call?
+Ans: In Java 8, interfaces can have default methods—methods with a body. If a class implements two interfaces that define the same default method, the compiler will 
+throw an error unless you explicitly resolve the conflict. Use IntefaceName.super.MethodName(). Example code below -
+
+interface A {
+    default void greet() {
+        System.out.println("Hello from A");
+    }
+}
+
+interface B {
+    default void greet() {
+        System.out.println("Hello from B");
+    }
+}
+
+class C implements A, B {
+    @Override
+    public void greet() {
+        // You must resolve the conflict explicitly
+        A.super.greet();  // or B.super.greet()
+    }
+}
+
+
+Q. Why private method is introduced in interface?
+Ans: Private methods were introduced in Java 9 interfaces to improve code modularity, reusability, and encapsulation within interfaces—especially when using default and static methods. Private methods in interfaces: Can be used only within the interface, Cannot be called by implementing classes, Can be private or private static. Example - 
+
+interface Logger {
+    default void logInfo(String message) {
+        log("INFO", message);
+    }
+
+    default void logError(String message) {
+        log("ERROR", message);
+    }
+
+    private void log(String level, String message) {
+        System.out.println(level + ": " + message);
+    }
+}
+
+Here, log() is a private helper method used by both logInfo() and logError(), but it’s not accessible to classes implementing Logger.
+
+
+Q. When to use default method and when to use static method in java 8?
+Ans: 
+Feature			default Method			static Method
+Tied to object?		Yes (can be overridden)		No (called via interface name)
+Access			Through instance			Through interface name
+Overrideable?		Yes					No
+
+
+Q. What is variable argument?
+Ans: Variable arguments (varargs) in Java allow a method to accept zero or more arguments of a specified type. This is useful when you don’t know in advance how many arguments 
+will be passed. Example - 
+
+public void printNames(String... names) {
+    for (String name : names) {
+        System.out.println(name);
+    }
+}
+
+String... names means the method can take any number of String arguments.
+Internally, Java treats names as an array: String[] names.
+Only one varargs parameter is allowed per method.
+It must be the last parameter in the method signature.
+
+
+Q. What is equals and hashcode contract?
+Ans: The equals() and hashCode() contract in Java defines how these two methods must behave together to ensure consistent and predictable behavior—especially when objects 
+are stored in hash-based collections like HashMap, HashSet, or Hashtable.
+Consistency Between equals() and hashCode() - 
+If two objects are equal according to equals(), they must have the same hashCode().
+If two objects have different hashCode() values, they are not equal.
+If two objects have the same hashCode(), they might be equal—but not necessarily.
+
+
+
+Q. What is the difference between base class and abstract class?
+Ans: A base class is a general term for any class that is extended or inherited by another class.
+Can be concrete (fully implemented) or abstract. Provides common functionality to derived classes.
+
+An abstract class is a special kind of base class that cannot be instantiated directly and may contain abstract methods (methods without implementation).
+Declared with the abstract keyword. Can have abstract and non-abstract methods. Used to define a template or blueprint for subclasses.
+Must be extended by another class that provides implementations for abstract methods. Example - 
+
+abstract class Shape {
+    abstract double area(); // abstract method
+    void display() {
+        System.out.println("Displaying shape...");
+    }
+}
+class Circle extends Shape {
+    double area() {
+        return Math.PI * 5 * 5;
+    }
+}
+
+
+Q. When we are using marker interface?
+Ans: A marker interface in Java is an interface that contains no methods or fields—it's used purely to mark or tag a class with metadata that can be recognized by the JVM or frameworks. Example - 
+
+public interface Serializable {}
+
+When a class implements Serializable, it tells the JVM that its objects can be converted into a byte stream.
+
+
+Q. What is volatile veriable?
+Ans: A volatile variable in Java is a special kind of variable used in multithreaded programming to ensure visibility of changes across threads.
+
+What Does volatile Do?
+When a variable is declared as volatile, it tells the Java Virtual Machine (JVM):
+“This variable might be modified by multiple threads—always read it directly from main memory, not from a thread’s local cache.”
+
+
+Q.Can we write funvtional interface without abstract method?
+Ans: No, you cannot write a functional interface without an abstract method—because by definition, a functional interface must have exactly one abstract method.
+
+Q. Suppose we have one TreeSet and it has two values, one is null and another one is some object lets say abc. Now we want to print the TreeSet. What will be the output?
+Ans: If you try to add both null and a non-null object like "abc" to a TreeSet in Java, you’ll get a NullPointerException at runtime.
+
+Q. If we give System.exit() in try catch block, Will finally execute after that also?
+Ans: No, the finally block will not execute if you call System.exit() inside the try or catch block.
+
+Q. What is fault isolation?
+Ans: Fault isolation is the practice of containing errors within a specific component or service so they don’t affect the entire system.Fault isolation ensures that when one part of a system fails, the failure is localized and does not cascade to other parts. This makes systems more robust, easier to debug, and safer to operate.
+
+
+Q. How to handle exceptions globally in spring boot?
+Ans: To handle exceptions globally in Spring Boot, use @ControllerAdvice(in class name) combined with @ExceptionHandler(in method signature). This allows you to centralize error 
+handling across all controllers and return consistent, structured responses.
+
+
+Q. What is the default scope in maven?
+Ans: In Maven, the default scope for dependencies is compile.
+
+
+Q. What is Maven plugin?
+Ans: A Maven plugin is a reusable unit of work that performs specific tasks during the build lifecycle of a Maven project. Plugins are the backbone of Maven—they execute goals like compiling code, running tests, packaging artifacts, and deploying applications. (e.g., compile, test, package, install).
