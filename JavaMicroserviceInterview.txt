@@ -1199,8 +1199,7 @@ Ans: Fault isolation is the practice of containing errors within a specific comp
 
 
 Q. How to handle exceptions globally in spring boot?
-Ans: To handle exceptions globally in Spring Boot, use @ControllerAdvice(in class name) combined with @ExceptionHandler(in method signature). This allows you to centralize error 
-handling across all controllers and return consistent, structured responses.
+Ans: To handle exceptions globally in Spring Boot, use @ControllerAdvice(in class name) combined with @ExceptionHandler(in method signature). This allows you to centralize error handling across all controllers and return consistent, structured responses.
 
 
 Q. What is the default scope in maven?
@@ -1209,3 +1208,214 @@ Ans: In Maven, the default scope for dependencies is compile.
 
 Q. What is Maven plugin?
 Ans: A Maven plugin is a reusable unit of work that performs specific tasks during the build lifecycle of a Maven project. Plugins are the backbone of Maven—they execute goals like compiling code, running tests, packaging artifacts, and deploying applications. (e.g., compile, test, package, install).
+
+******************************************************************************************************************************************************************
+
+Microservice Questions
+Q. What are microservices?
+Ans: Microservices are an architechtural style where an application is built as a collection of small, independent, and loosly coupled servoces.
+  
+Q. What are key features of microservices?
+Ans: Independent deployment - we can deploy each microservice independently.
+Fault tolarance - If one service is down, it won't affect other services.
+Scalability - We can scalable every microservices independently.
+
+Q. Main components of microservices?
+Ans: Api gateway, load balancer, data management, monitoring and logging(grafana), CI/CD pipeline.
+
+Q. What is the role of API gateway?
+Ans: An api gateway serves as a centralized entry point for managing client interactions with microservices. It helps in load balancing. It evenly distributes loads with all the 
+instance of a microservice. Also it checks for authorization. 
+
+Q. What is service discovery?
+Ans: It is a mechanism that enables microservices to dynamically locate and communicate with other services without hardcoded configurations, promoting flexibility.
+
+Q. What is container and why it used in microservices?
+Ans: A container is a standalone unit that bundles an application with its dependencies, including libraries, configurations and runtime.
+Advantage of container is continuous deployment. Other advantage is faster startup time. Containers are more light weight and have faster initialization, thereby enabling 
+quicker deployment and scalability.
+
+Q. How you handle failures in microservices?
+Ans: Circuit breaker.
+
+Q. What is OAuth?
+Ans: OAuth stands for open authorization. It is an open standard protocol that allows third party applications to access a user's resources without exposing their credentials such
+as passwords, username.
+
+Q. What is CQRS pattern in microservices?
+Ans: CQRS, or Command Query Responsibility Segregation, is a software design pattern that separates a system's read and write operations into distinct models. A command is an
+operation that changes state (like create, update, delete), while a query retrieves data without changing it. By segregating these functions, CQRS allows for independent 
+optimization, which improves performance, scalability, and security, especially in complex apploications.
+
+Q. How do you ensure security in microservices?
+Ans: Secure communication - add encryption so that the communication between services will be encrypted.
+Authentication and authorization
+Service level isolation - Here we restrict the access between the services to only necessary parts. This ensures services will interact only required things.
+
+Q. What is event driven architecture in microservices?
+Ans: It is a design pattern where microservices communicate with each other by producing and consuming events rather than making direct api calls.
+
+Q. What is Idempotency and why it is important in microservices?
+Ans: It ensures making the same request multiple times produces the same result, regardless how many time it is executed. In microservices sometimes it is common for
+the requests to be retry either by the client or by the services. Without Idempotency it leads to undesirable results such as duplicate records.
+
+
+Q. What is database sharding?
+Ans: It is a technique where large datasets are divided into smaller, more manageable pieces called "shards". In microsevice it is helpful as every service can have their 
+own database.
+
+Q.What is Canary deployment?
+Ans: It is a software release strategy where new version of a service is gradually introduced to a small subset of users before a full rollout to the entire database.
+
+Q. How would you monitor microservices?
+Ans: Distributed tracing: with this you track the flow of requests. Which helps in identify performance and finding root cause for errors.
+Metric Collection: It collects the key performance indicators such as response time, throuput, cpu usage.
+Visualization and alerting: Here you visualize collected metrics and tracing data using dashboards and creates alert to notify.
+
+Q. How do you design for scalability in microservices?
+Ans: Horizontal scalling: Increasing instance of a service to handle more load.
+Data partitioning (Sharding)
+Caching: storing frequently access data to reduce the load on the underlying database.
+Load balancing.
+
+Q. What is Chaos Engineering?
+Ans: Chaos Engineering is intesionally introducing controlled failure to test the services resilience and fault tolerance.
+
+Q. What are sidecars in Microservices?
+Ans: It is a design pattern where a lightweight container runs along side the main application container within the same deployment unit. Uses are monitoring and logging.
+And network traffic management. And security. 
+
+
+***********************************************************************************************************************************************************
+
+Q. What Is @SpringBootApplication?
+Ans: @SpringBootApplication is a meta-annotation that combines three core Spring annotations:
+@Configuration: Marks the class as a source of bean definitions.
+@EnableAutoConfiguration: Enables Spring Boot’s auto-configuration mechanism.
+@ComponentScan: Scans the package for Spring components like @Service, @Repository, and @Controller.
+
+
+Q. What is the issue if we use transactional in class or method level?
+Ans: Using @Transactional at the class level applies the transaction to all public methods, while using it at the method level gives you fine-grained control. However, 
+class-level usage can lead to unintended behavior, especially with internal method calls and exception handling.
+
+
+Q. What is compansating transaction and distributed transaction?
+Ans: A distributed transaction is a single transaction that spans multiple independent systems or databases, ensuring atomicity across all of them.
+Example: A banking app transfers money from Account A (in Service X) to Account B (in Service Y). Both services must commit or rollback together.
+
+A compensating transaction is a manual rollback mechanism used when a distributed transaction fails. Instead of rolling back automatically, you undo the effects of previous 
+successful steps.
+
+
+Q. Endpoints in actuator in spring boot?
+Ans: 
+Endpoint			Description
+/actuator/health		Shows application health status (e.g., UP, DOWN)
+/actuator/info		Displays arbitrary application info (e.g., version, description)
+/actuator/metrics		Exposes metrics like memory, CPU, GC, HTTP requests
+/actuator/env		Shows environment properties (system, application, etc.)
+
+
+Q. How JPA helps?
+Ans: JPA acts as a bridge between Java objects and database tables, enabling object-relational mapping (ORM). It abstracts the persistence layer, making it easier to 
+perform CRUD operations, manage relationships, and handle transactions.
+Key Benefits of JPA
+Object-Relational Mapping (ORM): Maps Java classes to database tables and fields to columns.
+Reduces Boilerplate Code: Eliminates repetitive SQL and JDBC code.
+
+Q. Suppose you have a requirement to dynamically fetch data with variable search criteria. How would you do that?
+Ans: 1. Spring Data JPA Query Methods
+Use method naming conventions to define queries:
+List<User> findByNameAndAge(String name, int age);
+
+2. @Query with JPQL or Native SQL
+Write custom queries:
+@Query("SELECT u FROM User u WHERE u.name = :name OR u.age = :age")
+List<User> search(@Param("name") String name, @Param("age") int age);
+
+
+Q. When we use custom query where we don't have option to use default query?
+Ans: We typically use custom queries in Spring Data JPA when default query methods (like findByName, findByEmailAndStatus, etc.) are not sufficient to express the desired 
+logic.
+
+1. Complex Conditions
+Default method naming becomes unreadable or impossible:
+@Query("SELECT u FROM User u WHERE u.age > :age AND u.status = :status")
+List<User> findActiveUsersOlderThan(@Param("age") int age, @Param("status") String status);
+
+2. Joins Across Entities
+When you need to join multiple tables/entities:
+@Query("SELECT o FROM Order o JOIN o.customer c WHERE c.name = :name")
+List<Order> findOrdersByCustomerName(@Param("name") String name);
+
+3. Aggregations or Grouping
+For queries involving COUNT, SUM, GROUP BY, etc.:
+@Query("SELECT c.name, COUNT(o) FROM Customer c JOIN c.orders o GROUP BY c.name")
+List<Object[]> countOrdersByCustomer();
+
+
+Q. What is Spring data JPA repository? And what are the disadvantages of it?
+Ans: Spring Data JPA Repository is an abstraction layer that simplifies data access in Spring applications by automatically generating queries and CRUD operations for 
+JPA entities.
+Disadvantages: Naming conventions for query methods which can be confusing and limited for complex queries. Custom implementation must be necessary for advance query.
+
+Q. Give example where == gives true and .equals() gives false?
+Ans: string s1="hi" 
+String s2="hi" 
+String s3=new String("hi") 
+s1==s2 True 
+s1.equals(s2) True 
+s1==s3 False
+s1.equals(s3) True //As content is same.
+
+
+Q. hat happens if two hashmap key has same hashcode?
+Ans: If two keys in a Java HashMap have the same hash code, the map handles it using a technique called collision resolution.
+
+What Happens Internally
+Hash Code Calculation:
+Each key's hashCode() is computed.
+If two keys return the same hash code, they are mapped to the same bucket in the internal array.
+
+Collision Handling:
+Java uses chaining to resolve collisions.
+The bucket becomes a linked list (or a balanced tree if many collisions occur).
+The map stores both entries in the same bucket but distinguishes them using .equals().
+
+Key Comparison:
+When retrieving a value, HashMap checks:
+First: Does the hash code match?
+Then: Does .equals() return true?
+If .equals() returns false, the keys are treated as distinct, even with the same hash code.
+
+
+Q. Suppose you store users sessions in hashmap. How would you ensure thread safety?
+Ans: 1. Use ConcurrentHashMap
+The most recommended solution:
+Map<String, Session> sessionMap = new ConcurrentHashMap<>();
+
+2. Synchronize Access Manually
+If you must use HashMap:
+Map<String, Session> sessionMap = new HashMap<>();
+
+synchronized (sessionMap) {
+    sessionMap.put("user123", session);
+}
+
+
+Q. What is Maven and why do we use?
+Ans: Apache Maven is a powerful build automation and project management tool used primarily for Java applications. It simplifies the process of building, 
+testing, packaging, and managing dependencies in software projects.
+
+Q. What is the difference between git rebase and git marge?
+Ans: git merge
+Combines two branches by creating a new merge commit that ties together the histories of both branches.
+
+git rebase
+Moves or replays commits from one branch onto another, creating a linear history.
+
+
+Q. What Is git cherry-pick?
+Ans: git cherry-pick lets you copy a specific commit from one branch and apply it to another.
+
