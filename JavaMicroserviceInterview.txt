@@ -1419,3 +1419,103 @@ Moves or replays commits from one branch onto another, creating a linear history
 Q. What Is git cherry-pick?
 Ans: git cherry-pick lets you copy a specific commit from one branch and apply it to another.
 
+**************************************************************************************************************************************************************
+Q. How microservice will work as a eureka server?
+Ans: 1. Add Eureka Server Dependency in pom.xml
+2.Enable Eureka Server in your main class:
+
+@SpringBootApplication
+@EnableEurekaServer
+public class EurekaServerApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(EurekaServerApplication.class, args);
+    }
+}
+
+3. Configure application.yml or application.properties
+
+server:
+  port: 8761
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+
+
+Q. We have application properties or yaml files, how to get those porperties in our code?
+Ans: 1. Using @Value Annotation
+# application.properties
+app.name=MyApp
+
+@Value("${app.name}")
+private String appName;
+
+2. Using @ConfigurationProperties
+
+# application.yml
+app:
+  name: MyApp
+  version: 1.0
+
+@Component
+@ConfigurationProperties(prefix = "app")
+public class AppProperties {
+    private String name;
+    private String version;
+
+    // getters and setters
+}
+
+
+Q. What is the difference between inject mock and mock?
+Ans: @Mock - Creates a mock object of a class or interface.
+
+@Mock
+private UserService userService;
+
+@InjectMocks - Creates an instance of the class under test, and injects the mocks into it.
+
+@InjectMocks
+private UserController userController;
+
+
+Q. I have a employee list where they hava name and price. Now I want name starts with N and price greater than 500. Also I want submission of this.
+How to get this usning stream?
+Ans: Using Java Streams by combining filter() and mapToDouble() with sum().
+
+public class Employee {
+    private String name;
+    private double price;
+
+    public Employee(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public String getName() { return name; }
+    public double getPrice() { return price; }
+
+    public static void main(String[] args) {
+        List<Employee> employees = Arrays.asList(
+            new Employee("Nina", 600),
+            new Employee("Nick", 450),
+            new Employee("Nora", 550),
+            new Employee("Alex", 700)
+        );
+
+        double total = employees.stream()
+            .filter(e -> e.getName().startsWith("N") && e.getPrice() > 500)
+            .mapToDouble(Employee::getPrice)
+            .sum();
+
+        System.out.println("Total price of filtered employees: " + total);
+    }
+}
+
+
+Q. what is nexus?
+Ans: Nexus is a repository management tool used to store, manage, and distribute software components like libraries, binaries, and containers. It's 
+especially popular in DevOps and Java development environments.
+
+
