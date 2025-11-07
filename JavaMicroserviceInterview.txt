@@ -1420,6 +1420,7 @@ Q. What Is git cherry-pick?
 Ans: git cherry-pick lets you copy a specific commit from one branch and apply it to another.
 
 **************************************************************************************************************************************************************
+INFOSYS Interview Questions (https://www.youtube.com/watch?v=EWpsZb45T_4)
 Q. How microservice will work as a eureka server?
 Ans: 1. Add Eureka Server Dependency in pom.xml
 2.Enable Eureka Server in your main class:
@@ -1480,7 +1481,7 @@ private UserService userService;
 private UserController userController;
 
 
-Q. I have a employee list where they hava name and price. Now I want name starts with N and price greater than 500. Also I want submission of this.
+Q. I have a employee list where they have name and price. Now I want name starts with N and price greater than 500. Also I want submission of this.
 How to get this usning stream?
 Ans: Using Java Streams by combining filter() and mapToDouble() with sum().
 
@@ -1520,7 +1521,7 @@ especially popular in DevOps and Java development environments.
 
 
 ************************************************************************************************************************************************
-INFOSYS Interview (https://www.youtube.com/watch?v=EWpsZb45T_4)
+WIPRO Interview (https://www.youtube.com/watch?v=W_O-vfafLIc)
 
 Q. How microservices are different from web services?
 Ans: 
@@ -1727,5 +1728,6 @@ You can add logic to setters or methods to validate inputs before updating field
 public void setAge(int age) {
     if (age > 0) this.age = age;
 }
+
 
 
