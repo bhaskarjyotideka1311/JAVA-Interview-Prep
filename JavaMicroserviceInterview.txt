@@ -1519,3 +1519,213 @@ Ans: Nexus is a repository management tool used to store, manage, and distribute
 especially popular in DevOps and Java development environments.
 
 
+************************************************************************************************************************************************
+INFOSYS Interview (https://www.youtube.com/watch?v=EWpsZb45T_4)
+
+Q. How microservices are different from web services?
+Ans: 
+Feature		Microservices Architecture						Web Services Architecture
+Definition		A design pattern where an app is split into small,          A method for communication between systems over a network
+			independent services							
+Scope	Entire	application architecture						Communication mechanism (e.g., SOAP, REST)
+Fault Isolation	Failure in one service doesn’t affect others			Failure can impact the whole system
+
+
+Q. Why we use lambda function in java8?
+Ans: 1. Concise Code - Reduces boilerplate code for anonymous classes.
+2. Functional Programming - Enables passing behavior as data.
+Works seamlessly with Streams API for filtering, mapping, and reducing collections.
+
+
+Q. What is the differnce between IOC and dependency injection?
+Ans: IoC is a design principle where the control of object creation and dependency management is transferred from the program itself to a container or framework.
+Instead of your code creating and managing dependencies, the framework does it for you.
+It’s a broad concept that includes various techniques like:
+Dependency Injection
+Service Locator
+
+Dependency Injection (DI)
+DI is a specific implementation of IoC where dependencies are injected into a class rather than the class creating them itself.
+
+
+Q. What is @Qualifier annotation and what error we can get if we don't use it?
+Ans: The @Qualifier annotation in Spring is used to resolve ambiguity when multiple beans of the same type exist. It tells Spring exactly which bean to inject 
+when there’s more than one candidate. For Example - 
+
+@Component("dog")
+public class Dog implements Animal {}
+@Component("cat")
+public class Cat implements Animal {}
+
+Now if we inject Animal directly it wiil throw error
+@Autowired
+private Animal animal;
+NoUniqueBeanDefinitionException: expected single matching bean but found 2
+
+Fix with @Qualifier
+@Autowired
+@Qualifier("dog")
+private Animal animal;
+
+
+Q. How you use jwt token?
+Ans: 1. User Logs In - 
+The user sends credentials (username/password) to your login endpoint. If valid, the server generates a JWT and returns it.
+2. Client Stores the Token - 
+The client (browser, mobile app) stores the token—usually in localStorage or sessionStorage.
+3. Client Sends Token with Requests - 
+For protected endpoints, the client sends the token in the Authorization header
+4. Server Validates the Token - 
+On each request, the server: Extracts the token. Verifies the signature and expiration. Parses the claims (e.g., username, roles)
+5. Access Granted or Denied - 
+If the token is valid, the request proceeds. If invalid or expired, the server returns 401 Unauthorized.
+
+
+Q. What do you mean by continuous integration and continuous development?
+Ans: Continuous Integration (CI) means frequently merging code changes into a shared repository with automated testing, while Continuous Delivery/Deployment 
+(CD) means automatically preparing or releasing those changes to production. Together, CI/CD streamlines software development and delivery.
+
+Q. What is static method?
+Ans: A static method in Java is a method that belongs to the class itself, rather than to instances of the class. You can call it without creating an object of the class.
+
+Q. Why the main method is static in java?
+Ans: The main method in Java is static because it needs to be called by the JVM without creating an instance of the class.
+
+Q. What is blank final variable in java?
+Ans: A blank final variable in Java is a final variable that is declared but not initialized at the time of declaration. It must be assigned exactly once before the 
+constructor or method completes execution.
+
+public class Employee {
+    final int id; // blank final variable
+
+    public Employee(int id) {
+        this.id = id; // must be initialized here
+    }
+}
+
+
+Q. How Java object is stored in a memory?
+Ans: In Java, objects are stored in the heap memory, while references to those objects are stored in the stack memory. The JVM manages this memory allocation dynamically 
+during runtime.
+
+Q. Suppose you have list of strings and you have to concatenate all using stream api?
+Ans: You can concatenate a list of strings using the Java Stream API with the Collectors.joining() method.
+
+public class ConcatenateStrings {
+    public static void main(String[] args) {
+        List<String> words = Arrays.asList("Java", "Stream", "API", "Example");
+
+        String result = words.stream()
+                             .collect(Collectors.joining(" ")); // Use space or any delimiter
+
+        System.out.println(result);
+    }
+}
+
+Q. What is the use of functional interface in java8?
+Ans: In Java 8, functional interfaces enable the use of lambda expressions and method references, allowing developers to write cleaner, more expressive, and functional-style code.
+
+
+Q. What is predicate in terms of functional interface?
+Ans: In Java 8, a Predicate<T> is a functional interface that represents a boolean-valued function of one argument. It's commonly used for filtering or conditional checks, 
+especially in the Stream API.
+
+**********************************************************************************************************************************************************
+
+Q. Features of Java 17?
+Ans: 1. Sealed Classes
+Restrict which classes can extend or implement a class/interface.
+Improves control over inheritance and enhances security.
+2. Removal of Deprecated Features
+Deprecated APIs and features from earlier versions (like the Applet API) have been removed.
+Helps clean up legacy code and improve performance.
+3.Improved garbage collection (G1 and ZGC). Better memory management and reduced latency.
+
+
+
+Q. What is sealed classes and why do we need sealed classes?
+Ans: Sealed classes in Java are a feature introduced in Java 17 that allow you to restrict which other classes or interfaces can extend or implement them. This gives you explicit 
+control over inheritance, making your code more secure, predictable, and easier to maintain.
+A sealed class is declared using the sealed keyword and specifies a list of permitted subclasses using the permits clause.
+
+public sealed class Shape permits Circle, Square, Triangle {}
+
+Each permitted subclass must be declared as either:
+final (cannot be extended further)
+sealed (can restrict further)
+non-sealed (open to extension)  
+For Example:
+
+public final class Circle extends Shape {}
+public non-sealed class Square extends Shape {}
+
+Why Do We Need Sealed Classes?
+1. Controlled Inheritance
+You define exactly which classes can extend your base class—no surprises from third-party extensions.
+2. Improved Security and Maintainability
+Limits subclassing to known, trusted classes—useful in APIs and frameworks.
+
+
+
+Q. Difference between stream and parallel stream?
+Ans: The key difference between stream() and parallelStream() in Java is that stream() processes elements sequentially using a single thread, while parallelStream() splits the 
+work across multiple threads for concurrent execution, potentially improving performance for large datasets.
+
+Feature		stream() (Sequential)		parallelStream() (Parallel)
+Execution		Single thread			Multiple threads (ForkJoinPool)
+Performance		Slower for large datasets	Faster for CPU-intensive tasks with large datasets
+
+
+Q. Why can't we use parallel stream every time?
+Ans: 1. Overhead for Small Tasks
+Parallel streams use the ForkJoinPool, which adds thread management overhead.
+For small datasets or lightweight operations, this overhead can make parallel streams slower than regular streams.
+2. Thread Safety Issues
+If your stream operations involve shared mutable state, parallel execution can cause race conditions or inconsistent results.
+
+
+Q. What Is Encapsulation?
+Ans: Encapsulation means hiding internal state and requiring all interaction to go through controlled access points. Typically, this is done by:
+Declaring fields as private.
+Providing public getters/setters to access or modify them.
+
+
+Q. Is it possible to add encaptualtion without getters and setters?
+Ans: Yes, it's possible to achieve encapsulation in Java without using getters and setters, though they are the most common way to expose and control access to private fields.
+
+Constructor-Based Encapsulation
+You can initialize fields via constructors and never expose them:
+
+public class User {
+    private final String name;
+
+    public User(String name) {
+        this.name = name;
+    }
+
+    public void printName() {
+        System.out.println("Name: " + name);
+    }
+}
+
+
+Q. How encapsulation improves security?
+Ans: Encapsulation improves security in Java by restricting direct access to an object's internal state and enforcing controlled interaction through well-defined interfaces.
+1. Protects Internal Data
+Fields are marked private, so they can't be accessed or modified directly from outside the class. Only trusted methods within the class can manipulate the data.
+public class User {
+    private String password;
+
+    public void setPassword(String password) {
+        if (isValid(password)) {
+            this.password = password;
+        }
+    }
+}
+2. Enforces Validation and Rules
+You can add logic to setters or methods to validate inputs before updating fields. This prevents inconsistent or dangerous states.
+public void setAge(int age) {
+    if (age > 0) this.age = age;
+}
+
+
