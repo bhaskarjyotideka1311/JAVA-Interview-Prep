@@ -1729,5 +1729,162 @@ public void setAge(int age) {
     if (age > 0) this.age = age;
 }
 
+****************************************************************************************************************************************************************
+MPHASIS Interview (https://www.youtube.com/watch?v=CGdtGXT8q2w&list=PLFBrmB-BmOrKVuhVZa-7W9fPVNw-Z8nql&index=5)
+
+Q. What is polymorphism?
+Ans: Polymorphism - poly means many and phism means forms means ability of an object, method, or operator to take on many forms. We have two types of polymorphism. 
+Complie time that is method overloading (in a class method names are same but parameters are different). And Run time polymorphism that is method overriding (Method name 
+and parameter are same but in class is different.
+
+Q. Wait and sleep in multithreading? 
+Ans: sleep() Method
+Defined in: Thread class
+Purpose: Pauses the current thread for a specified time.
+Behavior: Does not release locks (monitors) if the thread holds them. After the sleep duration, the thread becomes runnable again.
+
+wait() Method
+Defined in: Object class
+Purpose: Causes the current thread to wait until another thread calls notify() or notifyAll() on the same object.
+Behavior: Must be called inside a synchronized block/method. Releases the lock on the object while waiting. Thread remains in the waiting state until notified.
+
+Q. What is executor service?
+Ans: In Java, ExecutorService is a framework provided by the java.util.concurrent package that simplifies running tasks asynchronously using a pool of threads. 
+Instead of manually creating and managing threads, you submit tasks to an ExecutorService, and it handles scheduling, execution, and lifecycle management for you.
+
+
+Q. How to achieved the singleton design pattern?
+Ans: The Singleton Design Pattern ensures that a class has only one instance throughout the application and provides a global point of access to that instance. It’s 
+one of the most commonly used creational design patterns in Java.
+Steps to Achieve Singleton in Java
+1. Private Constructor - Prevents direct instantiation of the class from outside.
+2. Private Static Instance - Holds the single instance of the class.
+3. Public Static Accessor Method - Provides a global access point to the instance.
+
+public class Singleton {
+    private static Singleton instance;
+
+    private Singleton() {
+        // private constructor
+    }
+
+    public static Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton(); // create only once
+        }
+        return instance;
+    }
+}
+
+
+Q. How to break singleton?
+Ans: Ways to Break Singleton
+1. Reflection - Reflection can access private constructors and create new instances.
+2. Serialization & Deserialization - If a singleton class implements Serializable, deserializing it can create a new instance.
+3. Cloning - If the singleton class implements Cloneable, calling clone() can create another instance.
+
+
+Q. What is composit key in Java?
+Ans: In Java, the term composite key usually comes up in the context of databases and ORM frameworks (like Hibernate or JPA). It refers to a primary key made up of 
+multiple fields (columns) that together uniquely identify an entity. When mapping a database table to a Java class, sometimes a single field (like id) isn’t enough 
+to uniquely identify a record. In that case, you define a composite key using multiple fields.
+
+Using @IdClass - You define a separate key class and reference it in the entity.
+
+// Composite Key Class
+public class StudentCourseId implements Serializable {
+    private int studentId;
+    private int courseId;
+
+    // getters, setters, equals(), hashCode()
+}
+
+// Entity Class
+@Entity
+@IdClass(StudentCourseId.class)
+public class StudentCourse {
+    @Id
+    private int studentId;
+
+    @Id
+    private int courseId;
+
+    private String grade;
+}
+
+
+Q. Lazy loading and eager loading?
+Ans: Lazy Loading
+Definition: Data is loaded on demand, i.e., only when it is accessed for the first time.
+Behavior: When you fetch an entity, its related entities are not immediately loaded. Instead, a proxy object is created, and the actual data is fetched only 
+when you call a getter.
+Pros: Saves memory and improves performance if related data is not always needed. Reduces initial query load.
+
+@Entity
+class Student {
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+    private List<Course> courses;
+}
+
+
+Eager Loading
+Definition: Data is loaded immediately, i.e., at the time the parent entity is fetched.
+Behavior: When you query an entity, all its related entities are also fetched in the same query (often using JOIN).
+Pros : No risk of LazyInitializationException. Convenient if related data is always required.
+
+@Entity
+class Student {
+    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
+    private List<Course> courses;
+}
+
+
+Q. Suppose I want to export spring boot application into a war file and deploy it in a dedicated server. How to achieve that?
+Ans: Spring Boot applications are packaged as JARs (standalone with embedded Tomcat/Jetty). But if you want to deploy on a dedicated server with an external 
+servlet container (like Tomcat, JBoss, WebSphere), you need to package it as a WAR file.
+1. Update pom.xml - Change packaging type from jar to war -> 		<packaging>war</packaging>
+Add dependency for spring-boot-starter-tomcat but mark it as provided (since the server already has Tomcat):
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-tomcat</artifactId>
+    <scope>provided</scope>
+</dependency>
+2. Extend SpringBootServletInitializer
+Modify your main application class to extend SpringBootServletInitializer. This allows the WAR to be deployed in an external servlet container.
+
+
+Q. How one microsrvice consume another microservice?
+Ans: REST API Calls - Microservices expose endpoints (/api/...) over HTTP. Another microservice calls these endpoints using an HTTP client 
+(e.g., RestTemplate, WebClient in Spring Boot).
+
+// Using RestTemplate
+RestTemplate restTemplate = new RestTemplate();
+String response = restTemplate.getForObject("http://order-service/api/orders/123", String.class);
+
+
+Q. An array is there and I want to pring only duplicate elements. How to do that?
+Ans: Use Hashmap.
+
+public class DuplicateElements {
+    public static void main(String[] args) {
+        int[] arr = {4, 5, 6, 7, 4, 5, 8, 9, 6};
+
+        // Step 1: Create a HashMap to store frequencies
+        Map<Integer, Integer> freqMap = new HashMap<>();
+
+        // Step 2: Count occurrences
+        for (int num : arr) {
+            freqMap.put(num, freqMap.getOrDefault(num, 0) + 1);
+        }
+
+        // Step 3: Print duplicates
+        System.out.println("Duplicate elements are:");
+        for (Map.Entry<Integer, Integer> entry : freqMap.entrySet()) {
+            if (entry.getValue() > 1) {
+                System.out.println(entry.getKey());
+            }
+        }
+    }
+}
 
 
