@@ -1887,4 +1887,90 @@ public class DuplicateElements {
     }
 }
 
+****************************************************************************************************************************************************
+UST GLOBAL Interview (https://www.youtube.com/watch?v=zKm9CrAojUc)
+
+Q. Advantages of Java 8?
+Ans: 1. Lambda Expressions - Enable writing cleaner, shorter, and more expressive code.
+2. Stream API - Provides a functional way to process collections. Supports operations like map, filter, reduce.
+3. New Date and Time API (java.time) - Replaces the old Date and Calendar classes with a modern, immutable API.
+4. Default and Static Methods in Interfaces - Interfaces can now have method implementations.
+5. Optional Class - Helps avoid NullPointerException by explicitly handling absence of values.
+
+
+Q. What is thread?
+Ans: A thread in Java is the smallest unit of execution within a program, often called a lightweight subprocess. It allows multiple tasks to run 
+concurrently within the same application, sharing the same memory but executing independently.
+
+
+Q. Difference between run and start in start?
+Ans: run() Method - Defined in the Runnable interface and overridden in the Thread class.
+Purpose: Contains the code that will be executed by the thread.
+If you call run() directly, it behaves like a normal method call. It does not create a new thread; instead, it runs in the current thread.
+
+start() Method - Defined in the Thread class.
+Purpose: Starts a new thread of execution.
+Behavior: Internally calls the run() method, but in a separate thread.
+
+
+Q. Aggreagation and compostion concet in java?
+Ans:In Object-Oriented Programming (OOP), especially in Java, Aggregation and Composition are two important concepts that describe relationships 
+between classes. Both are forms of Association, but they differ in how strongly one object depends on another. 
+
+Aggregation
+Definition: A "Has-A" relationship where one class contains a reference to another, but the contained object can exist independently.
+Dependency: Weak relationship.
+Lifetime: The child object’s lifecycle is independent of the parent.
+Example: A Department has Teachers. Even if the Department is deleted, the Teacher objects can still exist.
+
+Composition
+Definition: A "Has-A" relationship where one class contains another, but the contained object cannot exist without the parent.
+Dependency: Strong relationship.
+Lifetime: The child object’s lifecycle is dependent on the parent.
+Example: A House has Rooms. If the House is destroyed, the Rooms are destroyed too.
+
+
+Q. Can we override the constructor?
+Ans: No.
+
+Q. What is request body annotation in spring boot?
+Ans: The @RequestBody annotation in Spring Boot is used to bind the HTTP request body to a Java object, automatically deserializing JSON or XML into that object.
+
+How It Works
+When a client sends data in the body of an HTTP request (e.g., JSON in a POST request), Spring uses HttpMessageConverters to convert that data into a Java object.
+The @RequestBody annotation tells Spring to look at the request body and map it to the parameter of your controller method.
+
+
+Q. Difference between controller and rest controller?
+Ans: @Controller is used in Spring MVC for traditional web applications, typically returning HTML views.
+@RestController is used for RESTful APIs, automatically returning JSON/XML responses without needing @ResponseBody on each method.
+
+Q. What is Controller advice?
+Ans: In Spring, @ControllerAdvice is a special annotation used to define global exception handling, data binding, and model attributes that apply to multiple 
+controllers. It centralizes common logic (like error handling) instead of repeating it in each controller.
+
+Q. Is session object thread safe in hibernate?
+Ans: The Hibernate Session object is not thread-safe. A Session represents a single unit of work with the database.
+If multiple threads access the same Session concurrently, they can corrupt its state or cause unpredictable behavior.
+Hibernate’s design expects one session per thread/request.
+
+Q. What is second level caching in hibernate?
+Ans: In Hibernate, the second-level cache is a shared cache that stores entity data across multiple sessions. Unlike the first-level cache (which is 
+session-specific), the second-level cache improves performance by reducing database hits for frequently accessed entities across the entire application.
+
+Q. What is aggregator desing pattern in microservice?
+Ans: The Aggregator pattern is used when a client request requires data from multiple microservices. Instead of the client calling each service individually, 
+an aggregator service calls the required microservices, collects their responses, and combines them into a single response.
+
+
+Q. What is circuit breaker desing pattern?
+Ans: The Circuit Breaker Design Pattern in microservices is a resilience pattern that prevents repeated calls to a failing service. It “trips” after detecting 
+multiple failures, stops further requests temporarily, and only allows calls again once the service shows signs of recovery
+
+Q. what is Hystrix?
+Ans: Hystrix is a Java library developed by Netflix that implements the Circuit Breaker design pattern to make microservices more resilient and fault‑tolerant.
+
+Q. What are rest template methods?
+Ans: Get. Post, Put, Delete. 
+
 
