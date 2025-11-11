@@ -1974,3 +1974,137 @@ Q. What are rest template methods?
 Ans: Get. Post, Put, Delete. 
 
 
+***********************************************************************************************************************************************************
+HCL Interview (https://www.youtube.com/watch?v=rtLRyFcuNJI&list=PLFBrmB-BmOrKVuhVZa-7W9fPVNw-Z8nql&index=6)
+
+Q. Suppose I have a arraylist of students with their marks. Now I want to sort it based on marks. Use Java8?
+Ans: 
+class Student {
+    String name;
+    int marks;
+
+    Student(String name, int marks) {
+        this.name = name;
+        this.marks = marks;
+    }
+
+    @Override
+    public String toString() {
+        return name + " - " + marks;
+    }
+}
+
+public class SortStudents {
+    public static void main(String[] args) {
+        List<Student> students = new ArrayList<>();
+        students.add(new Student("Alice", 85));
+        students.add(new Student("Bob", 72));
+        students.add(new Student("Charlie", 90));
+
+//using lambda
+students.sort((s1, s2) -> Integer.compare(s1.marks, s2.marks));
+// Print sorted list
+students.forEach(System.out::println);
+
+
+//Using stream
+students.stream()
+        .sorted(Comparator.comparingInt(s -> s.marks))
+        .forEach(System.out::println);
+
+
+
+Q. Give code snippet to apply singleton design pattern.
+Ans: 
+public class Singleton {
+
+    // Step 1: private static instance
+    private static Singleton instance;
+
+    // Step 2: private constructor to prevent instantiation
+    private Singleton() {
+        System.out.println("Singleton instance created");
+    }
+
+    // Step 3: public static method to provide access
+    public static synchronized Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton(); // create only once
+        }
+        return instance;
+    }
+
+    // Example method
+    public void showMessage() {
+        System.out.println("Hello from Singleton!");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Singleton obj1 = Singleton.getInstance();
+        Singleton obj2 = Singleton.getInstance();
+
+        obj1.showMessage();
+
+        // Verify both references point to the same object
+        System.out.println(obj1 == obj2); // true
+    }
+}
+
+
+Q. What is factory design patter?
+Ans: Definition: A design pattern that defines an interface for creating objects, but lets subclasses decide which class to instantiate.
+Purpose: Encapsulates object creation logic, making code more flexible and easier to maintain.
+
+
+Q. What is SOLID principles?
+Ans: 1. S – Single Responsibility Principle (SRP)
+Definition: A class should have only one reason to change.
+Meaning: Each class should do one thing only (one responsibility).
+Example:
+❌ A Student class that handles student data and writes logs.
+✅ Separate Student class (for data) and Logger class (for logging).
+
+2. O – Open/Closed Principle (OCP)
+Definition: Software entities should be open for extension but closed for modification.
+Meaning: You should be able to add new functionality without changing existing code.
+
+3. L – Liskov Substitution Principle (LSP)
+Definition: Subtypes must be substitutable for their base types.
+Meaning: If class B is a subclass of class A, then objects of A should be replaceable with objects of B without breaking the program.
+Example:
+✅ A Rectangle class and a Square class should behave consistently when used as a Shape.
+❌ If Square changes behavior unexpectedly (e.g., breaks area calculation), it violates LSP.
+
+4. I – Interface Segregation Principle (ISP)
+Definition: Clients should not be forced to depend on interfaces they do not use.
+Meaning: Create small, specific interfaces instead of large, general ones.
+Example:
+❌ A Printer interface with methods print(), scan(), fax().
+✅ Split into Printable, Scannable, Faxable interfaces. A simple printer only implements Printable.
+
+5. D – Dependency Inversion Principle (DIP)
+Definition: Depend on abstractions, not on concrete implementations.
+Meaning: High-level modules should not depend on low-level modules; both should depend on abstractions.
+Example:
+❌ A PaymentService directly depends on CreditCardPayment.
+✅ PaymentService depends on a Payment interface, and CreditCardPayment or UPIPayment implement that interface.
+
+
+Q. What is assertions?
+Ans: Assertions are statements used in testing to check whether the actual output of code matches the expected output. They act like checkpoints 
+in your test cases: if an assertion fails, the test fails.Assertions are fundamental in frameworks like JUnit (Java), TestNG, and other testing libraries.
+For Example:
+
+class CalculatorTest {
+    @Test
+    void testAddition() {
+        int result = Calculator.add(2, 3);
+        
+        // Assertion: expected 5, actual result
+        assertEquals(5, result, "Addition should return 5");
+    }
+}
+
+assertEquals(expected, actual) → checks if values are equal. If result is not 5, the test fails.
