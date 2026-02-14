@@ -2108,3 +2108,175 @@ class CalculatorTest {
 }
 
 assertEquals(expected, actual) → checks if values are equal. If result is not 5, the test fails.
+
+
+******************************************************************************************************************************************************************
+
+HASHMAP Interview Questions
+🟡 BASIC LEVEL (0–2 Years)
+
+Q. What is a HashMap in Java?
+Ans: A HashMap in Java is a data structure that stores elements in key–value pairs. It’s part of the java.util package and implements the Map interface.
+ 
+Q. Difference between HashMap and Hashtable?
+Ans: 
+Feature			HashMap											Hashtable
+Thread-safety		Not synchronized → not thread-safe. Must be wrapped or use   		Synchronized → thread-safe. Every method is synchronized, 
+				ConcurrentHashMap if multiple threads access it.				but slower.
+
+Null keys/values		Allows one null key and multiple null values.					Does not allow null keys or null values.
+ 
+Q. How does HashMap store key–value pairs internally?
+Ans: Internally, a HashMap in Java stores key–value pairs using an array of buckets, where each bucket holds a linked list or tree of nodes. 
+Each node represents one entry in the map.
+
+Q. Does HashMap allow duplicate keys?
+Ans: No. Keys in a HashMap must be unique.
+
+Q. Does HashMap allow null key and null values?
+Ans: Null Key → Allowed, but only one. If you insert multiple null keys, the latest value will overwrite the previous one. Internally, the null key 
+is always stored in bucket index 0.
+Null Values → Allowed, and you can have multiple null values associated with different keys.
+
+Q. Is HashMap ordered or sorted?
+Ans:  A HashMap in Java is neither ordered nor sorted by default.
+
+Q. What is the default initial capacity of HashMap?
+Ans: In Java, the default initial capacity of a HashMap is 16.
+Initial Capacity → the number of buckets (array size) created when the HashMap is first initialized.
+Load Factor → the threshold that triggers resizing. The default load factor is 0.75.
+When the number of entries exceeds capacity × loadFactor (i.e., 16 × 0.75 = 12), the HashMap automatically resizes (doubles its capacity to 32, then 64, and so on).
+
+Q. What is load factor in HashMap?
+Ans:  Default load factor = 0.75.
+
+Q. Time complexity of get() and put()?
+Ans:  Average case O(1). Worst case O(n) when if many keys collide into the same bucket, they form a linked list or tree, requiring traversal.
+ 
+Q. How does get() work internally?
+Ans: Internally, the get() method in HashMap works by using the key’s hash code to quickly locate the value. 
+  
+Q. What happens internally when put() is called?
+Ans:  ***Please check in copilot.***
+
+Q. How do you iterate over a HashMap?
+Ans:  Use entrySet() when you need both keys and values.
+Use keySet() when you only need keys.
+Use values() when you only need values.
+Use forEach for concise iteration in modern Java.
+
+Q. How do you check if HashMap is empty?
+Ans:  Use isEmpty() → cleaner and more readable.
+Use size() == 0 → works the same, but less expressive.
+
+Q. How do you find the size of HashMap?
+Ans: Use the built-in size() method.
+
+Q. What does clear() method do?
+Ans: The clear() method in a HashMap removes all key–value pairs from the map, leaving it completely empty. After calling clear(), the map’s size becomes 0.
+
+🟡 INTERMEDIATE LEVEL (3–5 Years) 
+
+Q. Which data structure does HashMap use internally?
+Ans:  Internally, a HashMap in Java uses a combination of arrays + linked lists + balanced trees to store key–value pairs.
+
+Q. Difference between Java 7 and Java 8 HashMap?
+Ans:  
+Feature			Java 7 HashMap							Java 8 HashMap
+Collision handling	Collisions stored as a linked list of entries  		Collisions initially stored as a linked list, but if a bucket grows beyond a
+				in the same bucket. Lookup in worst case = O(n).	threshold (default 8), it is converted into a red–black tree. Worst-case lookup = O(log n).
+
+Q. What is hash collision?
+Ans: A hash collision occurs when two different keys in a HashMap produce the same hash value and therefore map to the same bucket index in the internal array.
+ 
+Q. How does HashMap handle collisions?
+Ans: Chaining (Linked List) - In Java 7 and earlier, if multiple keys map to the same bucket, they are stored as a linked list of nodes.
+
+Treeification (Red–Black Tree) - Since Java 8, if the number of collisions in a single bucket exceeds a threshold (default 8), the linked list is converted into
+a balanced red–black tree. This reduces worst-case lookup time from O(n) to O(log n).
+
+Q. Role of equals() and hashCode()?
+Ans: Role of hashCode() - Used to compute the bucket index where the key–value pair will be stored.
+When you call put(key, value), HashMap calculates hashCode() of the key and maps it to a bucket.
+When you call get(key), HashMap uses the same hashCode() to locate the bucket.
+If two keys have the same hashCode(), they end up in the same bucket (collision). 
+
+Role of equals() - Once HashMap finds the correct bucket, it must distinguish between keys inside that bucket.
+equals() is used to check if the given key is equal to an existing key in the bucket.
+If equals() returns true, HashMap considers the keys identical and updates/retrieves the value.
+If equals() returns false, HashMap treats it as a different key and stores a new entry.
+
+Q. Same hashCode but equals() = false — what happens?
+Ans: If equals() returns false, HashMap treats it as a different key and stores a new entry.
+
+Q. equals() overridden but hashCode() not — impact?
+Ans: If two objects are equal according to equals(), they must return the same hashCode(). This ensures that equal objects are placed in the same bucket in a HashMap.
+Suppose you override equals() but leave hashCode() as inherited from Object. Two logically equal objects (per your equals() implementation) may produce different 
+hash codes. HashMap will place them in different buckets, so: Duplicate keys may appear. 
+get() may fail to find an existing key.
+containsKey() may return false even if the key is present.
+
+Q. Can we use mutable objects as HashMap keys?
+Ans: HashMap relies on a key’s hashCode() and equals() to store and retrieve entries. If the key object is mutable/modified after insertion, its hashCode() or 
+equals() result may change. This means HashMap may no longer be able to find the key in the correct bucket.
+As a result:
+get() may return null even though the key exists.
+containsKey() may fail.
+Duplicate entries may appear. 
+
+Q. When does HashMap resize?
+Ans: A HashMap resizes when the number of entries exceeds its threshold, which is calculated as:
+Threshold = Capacity × Load Factor 
+
+Q. What is rehashing?
+Ans: Rehashing in a HashMap refers to the process of redistributing existing entries into a new bucket array when the HashMap resizes. 
+
+Q. How does load factor affect performance?
+Ans: The load factor in a HashMap directly influences its performance and memory usage. It determines when the HashMap resizes, which affects how often 
+collisions occur and how much memory is consumed. 
+
+Q. Why initial capacity matters?
+Ans: The initial capacity of a HashMap matters because it directly affects performance and memory usage.
+Threshold Calculation → Threshold = capacity × loadFactor.
+If the initial capacity is too small, the threshold is low, so the HashMap resizes frequently.
+Each resize involves rehashing all entries, which is expensive.
+Memory Allocation → If the initial capacity is too large, you waste memory on unused buckets. 
+
+Q. What happens when duplicate key is inserted?
+Ans: When you insert a duplicate key into a HashMap, the new value simply replaces (overwrites) the old value associated with that key.
+
+Q. HashMap vs LinkedHashMap?
+Ans: 
+Feature			HashMap								LinkedHashMap
+Ordering			No guaranteed order of keys/values. 			Maintains insertion order by default. Can also maintain access order
+				Iteration order is arbitrary.					if configured (useful for LRU caches).
+Internal Structure	Hash table (array+linked list/tree for collisions)	Hash table + doubly linked list connecting all entries to preserve order. 
+
+Q. HashMap vs TreeMap?
+Ans: 
+Feature		HashMap										TreeMap
+Ordering		No guaranteed order of keys/values. Iteration order is 		Maintains sorted order of keys (natural ordering or 
+			arbitrary.										custom Comparator).
+Implementation	Based on hash table (array + linked list/tree for collisions)	Based on a Red–Black Tree (self-balancing binary search tree).
+ 
+Q. Why HashMap is not thread-safe?
+Ans: A HashMap is not thread-safe because it was designed for single-threaded performance and does not include synchronization mechanisms to protect its 
+internal data structures during concurrent access. 
+
+
+🔵 ADVANCED LEVEL (5+ Years) 
+Q. When does LinkedList convert to Red-Black Tree in Java 8?
+ Q. Exact conditions for treeification?
+ Q. When does untreeification happen?
+ Q. Worst-case time complexity (Java 7 vs 8)?
+ Q. Why HashMap capacity is always power of 2?
+ Q. How is bucket index calculated?
+ Q. Why bitwise AND instead of modulo?
+ Q. Impact of poor hashCode() implementation?
+ Q. Example of keys with same hashCode()?
+ Q. Memory overhead of HashMap?
+ Q. Problems during HashMap resizing?
+ Q. Infinite loop issue in Java 7 HashMap?
+ Q. Why HashMap doesn’t guarantee order?
+ Q. How is index calculated for null key?
+ Q. keySet() vs values() vs entrySet()?
