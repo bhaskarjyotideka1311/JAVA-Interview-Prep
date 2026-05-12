@@ -2280,3 +2280,334 @@ Q. When does LinkedList convert to Red-Black Tree in Java 8?
  Q. Why HashMap doesn’t guarantee order?
  Q. How is index calculated for null key?
  Q. keySet() vs values() vs entrySet()?
+
+
+***********************************************************************************************************************************************************
+JAVA Backend
+
+Q. What is Servlet?
+Ans: A Servlet is a Java class used to handle HTTP requests and responses in a web application. It runs on a server (inside a Servlet Container like Tomcat) 
+and is mainly used to build dynamic web applications.
+How it works -- 
+Receives requests from a web browser (usually HTTP)
+Processes business logic (e.g., validation, DB access)
+Sends a response (HTML, JSON, etc.) back to the client
+
+Servlet Lifecycle
+Managed by the servlet container:
+init() – called once when servlet is created
+service() – called for every request
+internally calls doGet(), doPost(), etc.
+destroy() – called once before servlet is removed
+
+Key Methods
+doGet() – handles GET requests
+doPost() – handles POST requests
+doPut(), doDelete() – REST-style APIs
+
+
+Q. What is a jsp page?
+Ans: A JSP page (Java Server Pages) is a server-side web page technology used in Java-based web applications to create dynamic web content.
+How JSP works:
+A user requests a .jsp page through a browser.
+The web server (like Apache Tomcat) converts the JSP into a Servlet.
+The Servlet executes Java code.
+The server sends the resulting HTML back to the browser.
+
+
+Q. What is Autoboxing and Unboxing?
+Ans: Autoboxing and Unboxing are features in Java that automatically convert between primitive data types and their corresponding wrapper classes.
+Unboxing is the automatic conversion of a wrapper class object back into its primitive type.
+
+Q. What is Java Applet?
+Ans: A Java Applet is a small Java program that is designed to be embedded in a web page and executed by a Java‑enabled web browser.
+
+Key Points About Java Applets:
+Written in Java and compiled into bytecode
+Runs inside a browser (like Chrome, Firefox, Internet Explorer in the past)
+Uses the class java.applet.Applet or javax.swing.JApplet
+Executed on the client side, not the server
+Has restricted access to system resources for security
+
+Applet Life Cycle Methods
+init() – Called once when the applet starts
+start() – Called when applet becomes active
+paint() – Used for drawing content
+stop() – Called when applet is stopped
+destroy() – Called before applet is removed
+
+
+Q. What is passed by value and passed by reference?
+Ans: When an object is passed by value, this means that a copy of the object is passed. Thus, even if changes are made to that object, it doesn’t 
+affect the original value.
+
+When an object is passed by reference, this means that the actual object is not passed, rather a reference of the object is passed. Thus, any changes 
+made by the external method, are also reflected in all places.
+
+
+Q. What is the difference between process and threads?
+Ans: a Process is a program which is executing some code and a Thread is an independent path of execution in the process.
+A process can have more than one thread for doing independent task e.g. a thread for reading data from disk, a thread for processing that data and 
+another thread for sending that data over the network.
+
+Q. What is static method and can you override it?
+Ans: The static keyword denotes that a member variable or method can be accessed, without requiring an instantiation of the class to which it belongs.
+A user cannot override static methods in Java, because method overriding is based upon dynamic binding at runtime and static methods are statically binded
+at compile time. A static method is not associated with any instance of a class so the concept is not applicable.
+
+
+Q. Is there anything like static class in java?
+Ans: No.
+
+Q. What is the difference between Applet and Servlet?
+Ans: Applet							Servlet
+Used to create GUI-based programs that run in a browser 	Used to create server-side web applications
+Client-side (runs in user’s browser)				Server-side (runs on web server)
+Requires Java-enabled browser or Applet Viewer			Runs inside a Servlet container (Tomcat, Jetty, etc.)
+
+
+Q. What is the difference between NoClassFoundException and NoClassDefFoundError?
+Ans: ClassNotFoundException → occurs at runtime when loading a class dynamically, and it is a checked exception.
+NoClassDefFoundError → occurs when a class was present at compile time but missing or failed at runtime, and it is an error.
+
+
+Q. Explain the role of Driver in JDBC?
+Ans: In JDBC (Java Database Connectivity), a Driver plays a core role as the bridge between a Java application and a database.
+A JDBC Driver is a software component (a set of Java classes) that:
+Implements JDBC interfaces
+Translates JDBC method calls into database-specific calls
+Enables communication between a Java application and a database
+Without a JDBC driver, Java cannot talk to a database.
+
+Q. Can == be used on enum?
+Ans: Yes.  For Example ---
+enum Day {
+    MONDAY, TUESDAY
+}
+
+Day d1 = Day.MONDAY;
+Day d2 = Day.MONDAY;
+
+System.out.println(d1 == d2);      // true // == is preferred.
+System.out.println(d1.equals(d2)); // true 
+
+
+
+Q. What does the ... dots in the method parameter means?
+Ans: The ... (three dots) in a method or function parameter generally means the method can accept a variable number of arguments.
+... allows you to pass zero or more values to a method instead of a fixed number.
+
+
+Q. What is Java Class Loader?
+Ans: A Java Class Loader is a part of the Java Runtime Environment (JRE) responsible for loading .class bytecode files into JVM memory at runtime.
+In simple terms:
+👉 Class Loader decides how and when Java classes are loaded into the JVM.
+
+
+Q. What is a JavaBean actually?
+Ans: A JavaBean is not a special Java class type, but a convention-based, reusable Java component that follows a set of well-defined rules so that tools, 
+frameworks, and containers can work with it automatically.
+
+JavaBean Rules : 
+Private fields
+Public no-argument constructor
+Getter and Setter methods
+Implements Serializable (Recommended)
+
+
+
+Q. What is the volatile keyword used for?
+Ans: In Java, the volatile keyword is used to make sure that changes to a variable are always visible to all threads.
+
+Q. Can an enum be extended?
+Ans: No.
+
+ 
+Q. What is JIT?
+Ans: JIT stands for Just‑In‑Time Compiler.
+A JIT compiler is a component of the Java Virtual Machine (JVM) that improves performance by compiling bytecode into native machine code at runtime—just 
+before execution.
+
+
+
+Q. Compare the sleep() and wait() method?
+Ans: sleep()
+A method of the Thread class
+Used to pause a thread for a fixed amount of time
+Pauses execution for a specified time
+Used mainly to delay execution.
+
+wait()
+A method of the Object class
+Used for inter‑thread communication (coordination between threads)
+Makes the current thread wait until another thread notifies it
+Used in producer–consumer and synchronization scenarios.
+
+
+Q. What is difference between final, finally, finallize?
+Ans: final is a keyword. It is used to restrict modification.
+
+finally is a block. It is used with try–catch to execute code whether an exception occurs or not.
+
+finalize() is a method (of Object class)
+Called by the Garbage Collector
+Used for cleanup before object destruction
+Executed automatically, not called directly.
+
+
+Q. What is difference between Iterator and ListIterator?
+Ans: Iterator: Iterator is part of the java.util package and works with all Collection types (List, Set, etc.).
+Key Features
+✅ Moves only forward
+✅ Can remove elements
+❌ Cannot add or update elements
+❌ Cannot traverse backwards
+❌ No index information
+
+ListIterator: ListIterator is a subinterface of Iterator and works only with List implementations (ArrayList, LinkedList, etc.).
+Key Features
+✅ Moves forward and backward
+✅ Can add, remove, and modify elements
+✅ Provides index positions
+❌ Cannot be used with Set or other non-List collections
+
+
+
+Q. Does Java support multiple inheritance?
+Ans: Java does not support multiple inheritance using classes to avoid ambiguity, but it supports multiple inheritance using interfaces, where 
+conflicts are resolved explicitly.
+
+
+Q. When is the finalize() called? What is the purpose of finalization?
+Ans: In Java, the finalize() method is called by the Garbage Collector (GC) before an object is removed from memory, if the object overrides the 
+finalize() method.
+The purpose of finalization is to perform cleanup actions before an object is destroyed. However, its execution is not guaranteed and it is 
+deprecated since Java 9,
+
+
+
+Q. What is Java PriorityQueue?
+Ans : A PriorityQueue in Java is a special type of queue where elements are ordered based on priority, not insertion order. It is part of the Java 
+Collections Framework and is implemented using a heap data.
+
+
+Q. What are the differences between Comparable and Comparator interface?
+Ans: Comparable Interface: Comparable is used to define the natural ordering of objects. It is implemented inside the class whose objects need to be sorted.
+Method -> compareTo()
+
+Comparator Interface: Comparator is used to define custom ordering. It is implemented in a separate class (or using lambda).
+Method: compare().
+
+
+Q. Explain different ways of creating thread? Which one would you prefer and why?
+Ans: 1. Extending Thread class
+You create a thread by extending the Thread class and overriding the run() method.
+
+2. Implementing Runnable interface
+You implement the Runnable interface and pass the object to a Thread instance.
+
+
+Q. What is Constructor, Copy Constructor and Constructor Overloading in Java?
+Ans: Constructor: A constructor is a special method used to initialize objects.
+It is automatically called when an object is created using the new keyword.
+
+Constructor Overloading: Constructor Overloading means having more than one constructor in a class with:
+Different number of parameters, OR Different types of parameters.
+
+Copy Constructor: Java does NOT have a built‑in copy constructor like C++.
+However, we can create our own constructor that copies data from another object of the same class. For Example:
+class Student {
+    int id;
+    String name;
+
+    // Parameterized constructor
+    Student(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    // Copy constructor (user-defined)
+    Student(Student s) {
+        this.id = s.id;
+        this.name = s.name;
+    }
+}
+
+Student s1 = new Student(101, "Jyoti");
+Student s2 = new Student(s1);  // Copy of s1
+
+
+
+Q. What are differences between == and equals?
+Ans: 1. == (Equality operator)
+What it compares
+Primitives → compares actual values
+Objects → compares memory references (whether both variables point to the same object)
+Examples
+Primitives
+int a = 10;
+int b = 10;
+System.out.println(a == b); // true
+👉 Values are the same.
+
+Objects
+String s1 = new String("Java");
+String s2 = new String("Java");
+System.out.println(s1 == s2); // false
+👉 Different objects in memory, even though content is the same.
+
+
+2. equals() (Method)
+What it compares
+Compares object content (logical equality)
+Defined in Object class, but often overridden by classes like String, Integer, Date, etc.
+Example
+String s1 = new String("Java");
+String s2 = new String("Java");
+System.out.println(s1.equals(s2)); // true
+
+
+Q. If an object reference is set to null, will the Garbage Collector immediately free the memory held by that object?
+Ans: No.
+Setting an object reference to null does not cause the Garbage Collector (GC) to immediately free the object’s memory.
+
+
+Q. What is the advantage of using getters and setters?
+Ans: Getters and setters allow you to control access to class fields.
+Fields remain private.
+Internal data is protected from direct modification.
+You can enforce rules before updating a value.
+
+
+Q. What is difference between Enumeration and Iterator interfaces?
+Ans: In Java, both Enumeration and Iterator are interfaces used to traverse elements of a collection, but they differ significantly 
+in capability, design, and usage.
+1. Element Removal Capability
+Enumeration
+❌ Cannot remove elements
+Read-only traversal
+
+Iterator
+✅ Can remove elements safely using remove()
+
+2. Fail-Fast vs Fail-Safe Behavior
+Enumeration
+❌ Not fail-fast
+Does not throw exceptions if the collection is modified
+
+Iterator
+✅ Fail-fast
+Throws ConcurrentModificationException if collection is modified structurally during iteration (except via remove())
+
+3. Supported Collections
+Enumeration
+Used with legacy classes like:
+Vector
+Hashtable
+
+Iterator
+Used with all modern collection classes:
+ArrayList
+HashSet
+LinkedList
+HashMap (via keySet, values, entrySet)
