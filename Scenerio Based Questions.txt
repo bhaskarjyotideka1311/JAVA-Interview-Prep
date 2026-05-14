@@ -1,0 +1,253 @@
+1. Microservices Failure Handling
+Scenario: You have a User Service and an Order Service. When placing an order, the Order Service calls the User Service to validate the user.
+Sometimes, the User Service is slow or down.
+Question: How would you design your system to handle this failure gracefully?
+Ans: In a distributed system, service failures are inevitable, so I design for resilience.
+First, I would use Resilience4j Circuit Breaker to prevent cascading failures. If the User Service is failing repeatedly, the circuit opens and stops further calls temporarily.
+
+Next, I would configure:
+	Timeouts (to avoid long waits)
+	Retry with exponential backoff (for transient failures)
+	A fallback method, for example returning a default validation response or rejecting the request gracefully.
+
+Additionally, I may:
+Use WebClient instead of RestTemplate for non-blocking calls
+Consider async communication (Kafka) if strong consistency is not required
+
+This ensures the system degrades gracefully instead of completely failing.
+
+
+2. Data Consistency Across Microservices
+Scenario: You are building an e-commerce system:
+
+Order Service
+Payment Service
+Inventory Service
+
+If payment succeeds but inventory update fails → inconsistency.
+Question: How would you ensure data consistency across services?
+Ans: In microservices, I avoid distributed transactions like 2PC due to performance and coupling.
+Instead, I use the Saga Pattern:
+
+Each service performs its own transaction
+If a step fails, I execute compensating transactions
+
+Example:
+Order created
+Payment success
+Inventory fails → trigger compensation:
+
+Refund payment
+Cancel order
+
+I can implement Saga via:
+	Choreography (events using Kafka)
+	Orchestration (central coordinator)
+
+This ensures eventual consistency and better scalability.
+
+
+
+3. Handling Large Traffic Spike
+Scenario: Your Spring Boot service suddenly receives 10x traffic during a sale and starts failing.
+Question: How do you handle scalability and performance?
+Ans: 
+For high traffic, I focus on scalability and performance.
+	Horizontal scaling using Kubernetes auto-scaling
+	Add a load balancer (Spring Cloud Gateway / Nginx)
+	Introduce caching (Redis + @Cacheable) for frequent reads
+	Optimize DB:
+		Indexing
+		Query tuning
+	Use connection pooling (HikariCP)
+	Offload heavy tasks using:
+		@Async
+		Kafka/RabbitMQ
+
+This reduces load and improves response time under peak traffic.
+
+
+
+4. API Versioning Strategy
+Scenario: Your API is already used by clients. You need to introduce breaking changes.
+Question: How will you version your APIs?
+Ans: I prefer URL versioning because it’s simple and widely adopted:
+
+/api/v1/users
+/api/v2/users
+
+For backward compatibility:
+	Keep older versions active
+	Mark APIs as deprecated before removal
+
+Alternatively:
+	Header-based versioning for cleaner URLs
+
+The key is avoiding breaking existing consumers.
+
+
+
+5. Debugging Production Issue
+Scenario: A Spring Boot microservice is slow in production but works fine locally.
+Question: How would you debug this?
+Ans: I follow a systematic approach:
+
+1. Logs analysis (ELK / Splunk)
+2. Check metrics via Spring Actuator
+	/actuator/metrics
+3.Identify bottlenecks:
+	DB queries (slow queries)
+	External API latency	
+4.Capture:
+	Thread dumps
+	Heap dumps
+5. Use monitoring tools:
+	Prometheus + Grafana
+
+Often performance issues are due to DB or network latency rather than application logic.
+
+
+
+6. Transaction Management in Spring Boot
+Scenario: You are saving data in multiple tables. If one fails, all should rollback.
+Question: How will you implement it?
+Ans: I use @Transactional in the service layer.
+
+Example:
+@Transactional
+public void createOrder() { }
+
+Key points:
+	Default propagation: REQUIRED
+	Use REQUIRES_NEW if separate transaction needed
+	Rollback happens on runtime exceptions
+
+I ensure business logic is inside transactional boundaries to maintain consistency.
+
+
+
+8. Database Choice in Microservices
+Scenario: Multiple services need data storage.
+Question: Should all services share one DB? Why or why not?
+Ans: I strongly follow Database per Service pattern.
+
+Sharing a database creates:
+	Tight coupling
+	Deployment dependency
+	Difficult schema evolution
+	
+Instead:
+	Each service owns its DB
+	Communicate via APIs or events
+
+This improves scalability and independence.
+
+
+
+9. Handling Distributed Logging
+Scenario: A request flows through 5 microservices. Debugging is difficult.
+Question: How do you trace a request?
+Ans: To trace requests across services:
+	Use Spring Cloud Sleuth to generate Correlation ID
+	Integrate with Zipkin / OpenTelemetry for tracing
+	Use centralized logging (ELK)
+
+Each log includes the trace ID, making it easy to follow a request end-to-end.
+
+
+
+
+10. Inter-Service Communication Choice
+Scenario: You need communication between services.
+Question: When would you use REST vs Messaging?
+Ans: Use REST when:
+	Immediate response needed
+	Simple request-response
+
+Use Messaging (Kafka/RabbitMQ) when:
+	Asynchronous processing
+	High scalability
+	Loose coupling
+
+In real systems, I often combine both.
+
+
+
+
+11. Memory Leak in Java Application
+Scenario: Your Spring Boot app memory keeps increasing.
+Question: How will you identify and fix it?
+Ans: I analyze memory leaks using:
+Heap dump tools (VisualVM, MAT)
+Look for:
+	Large collections
+	Static references
+	Unclosed resources
+
+Common fixes:
+	Clear caches properly
+	Use weak references if needed
+	Close DB connections and streams.
+
+
+
+12. Exception Handling Across Microservices
+Scenario: You want consistent error responses across all APIs.
+Question: How would you implement it?
+Ans: I implement @ControllerAdvice:
+
+@ControllerAdvice
+public class GlobalExceptionHandler { }
+
+Return a consistent error format:
+{
+  "timestamp": "",
+  "status": 500,
+  "message
+}
+
+This improves API usability and debugging.
+
+
+
+
+13. Deployment Strategy
+Scenario: You need zero downtime during deployment.
+Question: How do you achieve this?
+Ans: I use:
+
+Blue-Green deployment:
+	Switch traffic after validation
+Rolling updates (Kubernetes)
+Canary releases (test with small traffic)
+
+This ensures no service interruption during deployment.
+
+
+
+
+14. Handling Configuration in Microservices
+Scenario: You have multiple environments (dev, QA, prod).
+Question: How will you manage configs?
+Ans: I externalize configurations using:
+	Spring Cloud Config Server
+	Environment-specific files:
+
+application-dev.yml
+application-prod.yml
+
+
+
+15. Idempotency in APIs
+Scenario: A client retries a request due to timeout, causing duplicate orders.
+Question: How do you avoid duplicate processing?
+Ans: To prevent duplicate operations:
+	Use Idempotency keys
+	Store request IDs in DB
+	Reject duplicate requests
+
+Example:
+A payment request with same key is processed only once.
+
+
+
